@@ -1,6 +1,1 @@
-*
-!*/
-!*.gitignore
-!*.md
-!*.agda
-!*.agda-lib
+_build/
