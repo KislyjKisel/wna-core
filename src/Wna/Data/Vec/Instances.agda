@@ -1,6 +1,6 @@
 {-# OPTIONS --without-K --safe #-}
 
-module Wna.Instances.Foldable.Vec where
+module Wna.Data.Vec.Instances where
 
 open import Data.Vec.Base
 open import Wna.Class.Foldable using (Foldable; module MkFoldable)
@@ -9,10 +9,8 @@ open import Agda.Builtin.Nat using (zero; suc; _==_)
 
 List-Foldable : ∀{aℓ n} → Foldable (λ A → Vec {aℓ} A n)
 List-Foldable {aℓ} {n} = record
-    { fold     = Mk.foldr⇒fold foldr′
-    ; foldl    = foldl′
+    { foldl    = foldl′
     ; foldr    = foldr′
-    ; foldMap  = Mk.foldr⇒foldMap foldr′
     ; toList   = toList
     ; is-empty = λ _ → n == zero
     ; length   = λ _ → n
