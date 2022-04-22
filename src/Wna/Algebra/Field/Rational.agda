@@ -2,13 +2,13 @@
 
 module Wna.Algebra.Field.Rational where
 
-open import Data.Product using (_,_)
+open import Data.Product                                        using (_,_)
 open import Data.Rational
 open import Data.Rational.Properties
-open import Level using (0ℓ)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality.Properties using () renaming (isEquivalence to ≡-equiv)
+open import Relation.Binary.PropositionalEquality               using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality.Properties    using () renaming (isEquivalence to ≡-equiv)
 open import Wna.Algebra.Field
+open import Wna.Primitive
 
 ℚ-rawField : RawField 0ℓ 0ℓ
 ℚ-rawField = record
@@ -16,10 +16,10 @@ open import Wna.Algebra.Field
     ; _≈_ = _≡_
     ; _+_ = _+_
     ; _*_ = _*_
-    ; -_ = -_
+    ; -_  = -_
     ; _⁻¹ = λ {x} x≢0 → 1/_ x ⦃ ≢-nonZero x≢0 ⦄
-    ; 0# = 0ℚ
-    ; 1# = 1ℚ
+    ; 0#  = 0ℚ
+    ; 1#  = 1ℚ
     }
 
 ℚ-isField : IsField ℚ-rawField

@@ -2,13 +2,14 @@
 
 module Wna.Data.Endo.Instances where
 
+open import Wna.Class.HasIdentity       using (HasIdentity)
 open import Wna.Data.Endo
 open import Wna.Data.Endo.Properties
-open import Wna.Class.HasIdentity using (HasIdentity)
+open import Wna.Primitive
 
 instance
-    Endo-HasIdentity : ∀{aℓ} {A : Set aℓ} → HasIdentity {A = Endo A} _<>_
-    Endo-HasIdentity = record
+    _<>_-HasIdentity : ∀{aℓ} {A : Type aℓ} → HasIdentity {A = Endo A} _<>_
+    _<>_-HasIdentity = record
         { e     = unit
-        ; proof = <>-identity
+        ; proof = _<>_-identity
         }

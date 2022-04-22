@@ -2,23 +2,23 @@
 
 module Wna.Algebra.Field where
 
-import Algebra.Definitions
-open import Algebra using (Op₁; Op₂)
-open import Algebra.Bundles using (RawRing)
-open import Data.Product using (_×_; proj₁; proj₂)
-open import Level using (_⊔_) renaming (suc to lsuc)
-open import Relation.Binary using (Rel)
-open import Relation.Binary.Structures using (IsEquivalence)
-open import Relation.Nullary using (¬_)
+open import Algebra                     using (Op₁; Op₂)
+open import Algebra.Bundles             using (RawRing)
+open import Algebra.Definitions         using ()
+open import Data.Product                using (_×_; proj₁; proj₂)
+open import Relation.Binary             using (Rel)
+open import Relation.Binary.Structures  using (IsEquivalence)
+open import Relation.Nullary            using (¬_)
+open import Wna.Primitive
 
-record RawField c ℓ : Set (lsuc (c ⊔ ℓ)) where
+record RawField c ℓ : Type (ℓ↑ (c ℓ⊔ ℓ)) where
     infix  8 -_
     infixl 7 _*_
     infixl 6 _+_
     infix  4 _≈_
 
     field
-        Carrier : Set c
+        Carrier : Type c
         _≈_     : Rel Carrier ℓ
         _+_     : Op₂ Carrier
         _*_     : Op₂ Carrier
@@ -35,7 +35,7 @@ record RawField c ℓ : Set (lsuc (c ⊔ ℓ)) where
     _-_ : Op₂ Carrier
     x - y = x + (- y)
 
-record IsField {c ℓ} (F : RawField c ℓ) : Set (c ⊔ ℓ) where
+record IsField {c ℓ} (F : RawField c ℓ) : Type (c ℓ⊔ ℓ) where
     open RawField F
     open Algebra.Definitions _≈_
 
@@ -84,7 +84,8 @@ record IsField {c ℓ} (F : RawField c ℓ) : Set (c ⊔ ℓ) where
     *-inverseʳ : ∀{x} → (x≉0 : x ≉ 0#) → (x * (x≉0 ⁻¹)) ≈ 1#
     *-inverseʳ = proj₂ *-inverse
 
-record Field c ℓ : Set (lsuc (c ⊔ ℓ)) where
+
+record Field c ℓ : Type (ℓ↑ (c ℓ⊔ ℓ)) where
     field
         rawField : RawField c ℓ
         isField  : IsField rawField

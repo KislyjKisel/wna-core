@@ -2,12 +2,12 @@
 
 module Wna.Class.Foldable where
 
+open import Agda.Builtin.List       using (List; []; _∷_)
+open import Agda.Builtin.Nat        using ()                        renaming (Nat to ℕ)
+open import Data.Bool.Base          using (Bool; true; false; _∨_)
+open import Function.Base           using (id; flip; _∘′_)
+open import Wna.Class.RawEquality   using (RawEquality)
 open import Wna.Primitive
-open import Data.Bool.Base using (Bool; true; false; _∨_)
-open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using () renaming (Nat to ℕ)
-open import Wna.Class.RawEquality using (RawEquality)
-open import Function.Base using (id; flip; _∘′_)
 
 module FoldableFT {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) where
     foldl = {A : Type ℓ₁} → ∀{b} {B : Type b} → (B → A → B) → B → T A → B
@@ -15,7 +15,7 @@ module FoldableFT {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) where
     toList = {A : Type ℓ₁} → T A → List A
     is-empty = {A : Type ℓ₁} → T A → Bool
     length = {A : Type ℓ₁} → T A → ℕ
-    _∈ᵇ_ =  ∀{aℓ} {A : Set aℓ} → A → {B : Type ℓ₁} → ⦃ _ : RawEquality A B ⦄ → T B → Bool
+    _∈ᵇ_ =  ∀{aℓ} {A : Type aℓ} → A → {B : Type ℓ₁} → ⦃ _ : RawEquality A B ⦄ → T B → Bool
 
 record Foldable {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) : Typeω where
     module FT = FoldableFT T
