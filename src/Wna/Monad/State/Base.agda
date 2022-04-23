@@ -2,14 +2,13 @@
 
 module Wna.Monad.State.Base where
 
-open import Data.Product using (_×_; _,_)
-open import Data.Unit.Polymorphic using (⊤)
-open import Function.Base using ()
-open import Wna.Monad.Trans using (MonT; MonIT; MonTI)
-open import Wna.Class.RawApplicative using (IFun)
-open import Wna.Class.RawFunctor using (Fun)
-open import Wna.Class.RawMonad using (RawIMonad; RawMonad; module IMonadFT)
-open import Wna.Monad.Identity using (Identity)
+open import Data.Product                using (_×_; _,_)
+open import Data.Unit.Polymorphic       using (⊤)
+open import Wna.Class.RawApplicative    using (IFun)
+open import Wna.Class.RawFunctor        using (Fun)
+open import Wna.Class.RawMonad          using (RawIMonad; RawMonad; module IMonadFT)
+open import Wna.Monad.Identity          using (Identity)
+open import Wna.Monad.Trans             using (MonT; MonIT; MonTI)
 open import Wna.Primitive
 
 record StateTI {ℓ} (M : Fun ℓ) (i j : Type ℓ) (A : Type ℓ) : Type ℓ where

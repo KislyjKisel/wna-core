@@ -2,15 +2,14 @@
 
 module Wna.Monad.State.Bundles where
 
-open import Data.Product using (_,′_; _,_)
-open import Wna.Monad.Trans
-open import Wna.Class.RawApplicative using (IFun; module MkRawIApplicative)
-open import Wna.Class.RawFunctor using (Fun)
-open import Wna.Class.RawMonad using (RawIMonad; RawMonad; module IMonadFT; module MkRawIMonad)
-open import Wna.Monad.Identity using () renaming (rawMonad to id-rawMonad)
-open import Wna.Monad.State.Base
-open import Wna.Class.Monad.Trans using (Trans)
 open import Wna.Class.Monad.State as CS using ()
+open import Wna.Class.Monad.Trans       using (Trans)
+open import Wna.Class.RawApplicative    using (IFun; module MkRawIApplicative)
+open import Wna.Class.RawFunctor        using (Fun)
+open import Wna.Class.RawMonad          using (RawIMonad; RawMonad; module IMonadFT; module MkRawIMonad)
+open import Wna.Monad.Identity    as Id using ()
+open import Wna.Monad.State.Base
+open import Wna.Monad.Trans
 open import Wna.Primitive
 
 rawMonadTI : ∀{ℓ} → RawMonadTI (StateTI {ℓ}) 
@@ -21,7 +20,7 @@ rawMonadTI {ℓ = ℓ} {F = M'} ⦃ M ⦄ = record
     }
 
 rawIMonad : ∀{ℓ} → RawIMonad (IState {ℓ = ℓ})
-rawIMonad = rawMonadTI ⦃ id-rawMonad ⦄
+rawIMonad = rawMonadTI ⦃ Id.rawMonad ⦄
 
 rawMonadIT : ∀{ℓ} {S : Type ℓ} → RawMonadIT (StateIT S)
 rawMonadIT {ℓ = ℓ} {S = S} {I = I} {F = M} ⦃ M-imonad ⦄ = record
