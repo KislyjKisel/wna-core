@@ -13,6 +13,7 @@ module RawEqualityFT {aℓ} {bℓ} (A : Type aℓ) (B : Type bℓ) where
 
 record RawEquality {aℓ} {bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ ℓ⊔ bℓ) where
     private module FT = RawEqualityFT A B
+    infix 4 _≡ᵇ_ _≢ᵇ_
     field
         _≡ᵇ_ : A → B → Bool
         _≢ᵇ_ : A → B → Bool
@@ -20,7 +21,8 @@ record RawEquality {aℓ} {bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ �
 open RawEquality ⦃...⦄ public
 
 module MkRawEquality {aℓ} {bℓ} (A : Type aℓ) (B : Type bℓ) where
-    private module FT = RawEqualityFT A B
+    private
+        module FT = RawEqualityFT A B
     
     _≡ᵇ_⇒_≢ᵇ_ : FT._≡ᵇ_ → FT._≢ᵇ_
     _≡ᵇ_⇒_≢ᵇ_ _≡ᵇ_ x y = not (x ≡ᵇ y) 

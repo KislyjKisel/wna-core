@@ -6,7 +6,7 @@ open import Data.Bool.Base  using (Bool; not)
 open import Function.Base   using (flip)
 open import Wna.Primitive
 
-record RawOrderStrict {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ ℓ⊔ bℓ) where
+record RawStrictOrder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ ℓ⊔ bℓ) where
     infix 4 _<ᵇ_ _>ᵇ_ _≱ᵇ_ _≰ᵇ_
     field
         _<ᵇ_ : A → B → Bool
@@ -15,9 +15,9 @@ record RawOrderStrict {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ �
     _≱ᵇ_ = _<ᵇ_
     _≰ᵇ_ = _>ᵇ_
 
-open RawOrderStrict ⦃...⦄ public
+open RawStrictOrder ⦃...⦄ public
 
-record RawOrderNonstrict {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ ℓ⊔ bℓ) where
+record RawOrder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ ℓ⊔ bℓ) where
     infix 4 _≤ᵇ_ _≥ᵇ_ _≯ᵇ_ _≮ᵇ_
     field
         _≤ᵇ_ : A → B → Bool
@@ -26,4 +26,4 @@ record RawOrderNonstrict {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Type (a�
     _≯ᵇ_ = _≤ᵇ_
     _≮ᵇ_ = _≥ᵇ_
 
-open RawOrderNonstrict ⦃...⦄ public
+open RawOrder ⦃...⦄ public

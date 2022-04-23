@@ -18,7 +18,8 @@ module FoldableFT {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) where
     _∈ᵇ_ =  ∀{aℓ} {A : Type aℓ} → A → {B : Type ℓ₁} → ⦃ _ : RawEquality A B ⦄ → T B → Bool
 
 record Foldable {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) : Typeω where
-    module FT = FoldableFT T
+    private module FT = FoldableFT T
+    infix 4 _∈ᵇ_
     field
         foldl    : FT.foldl
         foldr    : FT.foldr
@@ -27,6 +28,7 @@ record Foldable {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) : Typeω where
         length   : FT.length
         _∈ᵇ_     : FT._∈ᵇ_
 
+open Foldable ⦃...⦄ public
 
 module MkFoldable {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) where
     module FT = FoldableFT T
@@ -82,6 +84,4 @@ module MkFoldable {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) where
         ; length   = foldl⇒length foldl
         ; _∈ᵇ_     = foldl⇒_∈ᵇ_ foldl
         }
-
-open Foldable ⦃...⦄ public
  

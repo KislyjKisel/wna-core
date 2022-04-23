@@ -58,7 +58,17 @@ record Square {aℓ} (A : Type aℓ) : Typeω where
 
 open Square ⦃...⦄ public
 
+record Inverse {aℓ} (A : Type aℓ) : Typeω where
+    infixl 8 _⁻¹
+    field
+        {r} : _
+        R   : Type r
+        _⁻¹ : A → R
+
+open Inverse ⦃...⦄ public
+
 record Power {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
+    infixl 8 _^_
     field
         {r} : _
         R   : Type r
@@ -83,6 +93,7 @@ record Absolute {aℓ} (A : Type aℓ) : Typeω where
 open Absolute ⦃...⦄ public
 
 record Join {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
+    infixl 6 _∨_
     field
         {r} : _
         R   : Type r
@@ -91,6 +102,7 @@ record Join {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
 open Join ⦃...⦄ public
 
 record Meet {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
+    infixl 7 _∧_
     field
         {r} : _
         R   : Type r
