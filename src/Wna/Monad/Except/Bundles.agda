@@ -2,16 +2,16 @@
 
 module Wna.Monad.Except.Bundles where
 
-open import Data.Sum.Base using (inj₁; inj₂)
-open import Function using (_$_)
-open import Wna.Class.Monad.Handle using (Handle)
-open import Wna.Class.Monad.Raise using (Raise)
+open import Data.Sum.Base                       using (inj₁; inj₂)
+open import Function.Base                       using (_$_)
+open import Wna.Class.Monad.Handle              using (Handle)
+open import Wna.Class.Monad.Raise               using (Raise)
 open import Wna.Class.Monad.Trans
-open import Wna.Class.RawApplicative using (module ApplicativeFT)
-open import Wna.Class.RawFunctor using (Fun)
-open import Wna.Class.RawMonad using (RawMonad; module MonadFT; module MkRawMonad)
-open import Wna.Monad.Except.Base as Ex hiding (raise; handle)
-open import Wna.Monad.Identity.Bundles as Id using ()
+open import Wna.Class.RawApplicative            using (module ApplicativeFT)
+open import Wna.Class.RawFunctor                using (Fun)
+open import Wna.Class.RawMonad                  using (RawMonad; module MonadFT; module MkRawMonad)
+open import Wna.Monad.Except.Base       as Ex   hiding (raise; handle)
+open import Wna.Monad.Identity.Bundles  as Id   using ()
 open import Wna.Monad.Trans
 open import Wna.Primitive
 

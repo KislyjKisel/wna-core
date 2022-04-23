@@ -39,13 +39,13 @@ record IState {ℓ} (M : IFun (Type ℓ) ℓ ) ⦃ M-monad : RawIMonad M ⦄ : T
 open IState ⦃...⦄ public
     using (iget; iput)
 
-IState⇒State : ∀{ℓ} {M : IFun (Type ℓ) ℓ} ⦃ M-monad : RawIMonad M ⦄ →
-               IState M ⦃ M-monad ⦄ → ∀{i : Type ℓ} → State (M i i) ⦃ RawIMonad.rawMonad M-monad ⦄
-IState⇒State ist {i = i} = record
-    { S   = i
-    ; get = IState.iget ist
-    ; put = IState.iput ist
-    }
+-- IState⇒State : ∀{ℓ} {M : IFun (Type ℓ) ℓ} ⦃ M-monad : RawIMonad M ⦄ →
+--                IState M ⦃ M-monad ⦄ → ∀{i : Type ℓ} → State (M i i) ⦃ RawIMonad.rawMonad M-monad ⦄
+-- IState⇒State ist {i = i} = record
+--     { S   = i
+--     ; get = IState.iget ist
+--     ; put = IState.iput ist
+--     }
 
 record IState′ {ℓ} (M : IFun′ (Type ℓ) ) ⦃ M-monad : RawIMonad′ M ⦄ : Typeω where
     field
@@ -55,10 +55,10 @@ record IState′ {ℓ} (M : IFun′ (Type ℓ) ) ⦃ M-monad : RawIMonad′ M �
 open IState′ ⦃...⦄ public
     using (iget′; iput′)
 
-IState′⇒State′ : ∀{ℓ} {M : IFun′ (Type ℓ)} ⦃ M-monad : RawIMonad′ M ⦄ →
-                 IState′ M ⦃ M-monad ⦄ → ∀{i : Type ℓ} → State′ (M i i) ⦃ RawIMonad′.rawMonad′ M-monad ⦄
-IState′⇒State′ ist {i = i} = record
-    { S    = i
-    ; get′ = IState′.iget′ ist
-    ; put′ = IState′.iput′ ist
-    }
+-- IState′⇒State′ : ∀{ℓ} {M : IFun′ (Type ℓ)} ⦃ M-monad : RawIMonad′ M ⦄ →
+--                  IState′ M ⦃ M-monad ⦄ → ∀{i : Type ℓ} → State′ (M i i) ⦃ RawIMonad′.rawMonad′ M-monad ⦄
+-- IState′⇒State′ ist {i = i} = record
+--     { S    = i
+--     ; get′ = IState′.iget′ ist
+--     ; put′ = IState′.iput′ ist
+--     }
