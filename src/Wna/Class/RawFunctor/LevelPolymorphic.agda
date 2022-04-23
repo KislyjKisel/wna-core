@@ -3,11 +3,14 @@
 module Wna.Class.RawFunctor.LevelPolymorphic where
 
 open import Function                using (const; flip)
-open import Wna.Class.RawFunctor    using (RawFunctor)
+open import Wna.Class.RawFunctor    using (RawFunctor; Fun)
 open import Wna.Primitive
 
 Fun′ : Typeω
-Fun′ = ∀{a} → Type a → Type a
+Fun′ = ∀{ℓ} → Type ℓ → Type ℓ
+
+Fun′⇒Fun : Fun′ → ∀{ℓ} → Fun ℓ
+Fun′⇒Fun F′ = F′
 
 module FunctorFT′ (F : Fun′) where
 

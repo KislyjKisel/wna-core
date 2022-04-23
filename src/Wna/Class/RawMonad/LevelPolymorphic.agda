@@ -22,7 +22,7 @@ module IMonadFT′ {iℓ} {I : Type iℓ} (F : IFun′ I) where
     join′ = ∀ {aℓ} {A : Type aℓ} {i j k} → F i j (F j k A) → F i k A
 
 
-module MonadFT′ {F : Fun′} where
+module MonadFT′ (F : Fun′) where
     open IMonadFT′ (Fun′⇒IFun′ F) public
 
 

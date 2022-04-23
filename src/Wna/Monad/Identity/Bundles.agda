@@ -1,10 +1,8 @@
 {-# OPTIONS --without-K --safe #-}
 
-module Wna.Monad.Identity.Properties where
+module Wna.Monad.Identity.Bundles where
 
-open import Function                                using (flip; id; _$_)
-open import Relation.Binary.PropositionalEquality   using (refl)
-open import Wna.Class.RawMonad.LevelPolymorphic     using (RawMonad′; module MkRawMonad′)
+open import Wna.Class.RawMonad.LevelPolymorphic using (RawMonad′; module MkRawMonad′)
 open import Wna.Monad.Identity.Base
 open import Wna.Monad.Trans
 

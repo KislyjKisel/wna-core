@@ -38,7 +38,7 @@ module IApplicativeFT′ {iℓ} {I : Type iℓ} (F : IFun′ I) where
     _*>′_ = ∀ {aℓ} {A : Type aℓ} {bℓ} {B : Type bℓ} {i j k} → F i j A → F j k B → F i k B
 
 
-module ApplicativeFT′ {F : Fun′} where
+module ApplicativeFT′ (F : Fun′) where
     open IApplicativeFT′ (Fun′⇒IFun′ F) public
 
 
