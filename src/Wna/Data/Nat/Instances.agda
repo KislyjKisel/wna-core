@@ -2,7 +2,9 @@
 
 module Wna.Data.Nat.Instances where
 
-open import Data.Nat.Base
+open import Data.Nat
+open import Wna.Class.DecEquality   as DEq using ()
+open import Wna.Class.DecOrder      as DOr using ()
 open import Wna.Class.Numeric       as Num using ()
 open import Wna.Class.RawEquality   as REq using ()
 open import Wna.Class.RawOrder      as ROr using ()
@@ -33,8 +35,14 @@ instance
     _ = from:_≡ᵇ_ _≡ᵇ_
         where open REq.MkRawEquality ℕ ℕ
 
-    _ : ROr.RawOrderStrict ℕ ℕ
+    _ : ROr.RawStrictOrder ℕ ℕ
     _ = record { _<ᵇ_ = _<ᵇ_ }
 
-    _ : ROr.RawOrderNonstrict ℕ ℕ
+    _ : ROr.RawOrder ℕ ℕ
     _ = record { _≤ᵇ_ = _≤ᵇ_ }
+
+    _ : DOr.DecStrictOrder ℕ ℕ
+    _ = record { _<?_ = _<?_ }
+
+    _ : DOr.DecOrder ℕ ℕ
+    _ = record { _≤?_ = _≤?_ }
