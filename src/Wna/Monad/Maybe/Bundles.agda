@@ -33,7 +33,7 @@ module _ {ℓ} where
             }
 
     rawMonadT : RawMonadT (MaybeT {ℓ})
-    rawMonadT ⦃ M ⦄ = MkRawMonad.from:pure,>>= pure _>>=_
+    rawMonadT = MkRawMonad.from:pure,>>= pure _>>=_
 
     rawApplicative : RawMonadT-RawApplicative (MaybeT {ℓ})
     rawApplicative = RawMonad.rawApplicative rawMonadT

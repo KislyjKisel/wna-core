@@ -30,8 +30,11 @@ module _ {eℓ} {E : Type eℓ} where
     rawMonad : RawMonad (Except E)
     rawMonad = rawMonadT ⦃ Id.rawMonad ⦄
 
-    open RawMonad rawMonad public
-        using (rawApplicative; rawFunctor)
+    rawApplicative : RawMonadT-RawApplicative (ExceptT E)
+    rawApplicative = RawMonad.rawApplicative rawMonadT
+
+    rawFunctor : RawMonadT-RawFunctor (ExceptT E)
+    rawFunctor = RawMonad.rawFunctor rawMonadT
 
     raise : ∀{M} ⦃ M-monad : RawMonad M ⦄ → Raise (ExceptT E M) ⦃ rawMonadT ⦃ M-monad ⦄ ⦄
     raise ⦃ M-monad ⦄ = record

@@ -10,7 +10,7 @@ open import Wna.Class.RawApplicative            using (IFun; module MkRawIApplic
 open import Wna.Class.RawMonad                  using (RawIMonad; RawMonad; module MkRawIMonad)
 open import Wna.Monad.Identity.Bundles  as Id   using ()
 open import Wna.Monad.Reader.Base       as Re   hiding (ask; local)
-open import Wna.Monad.Trans                     using (RawMonadIT; RawMonadT)
+open import Wna.Monad.Trans
 open import Wna.Primitive
 
 module _ {rℓ} {R : Type rℓ} where
@@ -23,15 +23,16 @@ module _ {rℓ} {R : Type rℓ} where
         }
 
     rawMonadT : RawMonadT (ReaderT R)
-    rawMonadT ⦃ M-monad ⦄ = rawMonadIT ⦃ M-monad ⦄
+    rawMonadT = rawMonadIT
 
     rawMonad : RawMonad (Reader R)
     rawMonad = rawMonadT ⦃ Id.rawMonad ⦄
 
-    open RawMonad rawMonad public using
-        ( rawApplicative
-        ; rawFunctor
-        )
+    rawApplicative : RawMonadT-RawApplicative (ReaderT R)
+    rawApplicative = RawMonad.rawApplicative rawMonadT
+
+    rawFunctor : RawMonadT-RawFunctor (ReaderT R)
+    rawFunctor = RawMonad.rawFunctor rawMonadT
 
     ask : ∀{iℓ} {I : Type iℓ} {i : I} {M : IFun I rℓ} ⦃ M-monad : RawIMonad M ⦄ → Ask (ReaderIT R M i i) ⦃ RawIMonad.rawMonad $ rawMonadIT ⦃ M-monad ⦄ ⦄
     ask ⦃ M-monad ⦄ = record
