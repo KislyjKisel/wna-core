@@ -11,7 +11,6 @@ open import Wna.Monad.Trans             using (MonT)
 open import Wna.Primitive
 
 record ReaderIT {rℓ} (R : Type rℓ) {iℓ} {I : Type iℓ} (M : IFun I rℓ) (i j : I) (A : Type rℓ) : Type rℓ where
-    inductive
     no-eta-equality
     pattern
     constructor mkReader

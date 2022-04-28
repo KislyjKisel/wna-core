@@ -2,22 +2,20 @@
 
 module Wna.Monad.Identity.Base where
 
-open import Function.Base                           using (flip; id; _$_)
-open import Wna.Class.RawFunctor.LevelPolymorphic   using (Fun′)
 open import Wna.Class.RawMonad.LevelPolymorphic     using (module MonadFT′)
-open import Wna.Monad.Trans                         using (MonT′; MonIT′)
 open import Wna.Primitive
 
-Identity : Fun′
-Identity = id
+record Identity {ℓ} (A : Type ℓ) : Type ℓ where
+    no-eta-equality
+    pattern
+    constructor mkIdentity
+    field
+        runIdentity : A
 
-IdentityT : MonT′
-IdentityT M = M
+open Identity public
 
-IdentityIT : MonIT′
-IdentityIT M = M
+pure′ : MonadFT′.pure′ Identity
+pure′ x = mkIdentity x
 
-pure′ = id
-
-_>>=′_ : MonadFT′._>>=′_ _
-_>>=′_ = flip _$_
+_>>=′_ : MonadFT′._>>=′_ Identity
+_>>=′_ (mkIdentity x) f = f x

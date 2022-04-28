@@ -15,8 +15,8 @@ open import Wna.Monad.Trans                             using (RawMonadT; RawMon
 
 rawMonad′ : RawMonad′ Maybe
 rawMonad′ = record
-        { _>>=′_           = _>>=′_ ⦃ Id.rawMonad′ ⦄
-        ; join′            = MkRawMonad′.>>=′⇒join′ (_>>=′_ ⦃ Id.rawMonad′ ⦄)
+        { _>>=′_           = mb-bind
+        ; join′            = MkRawMonad′.>>=′⇒join′ mb-bind
         ; rawIApplicative′ = record
             { pure′       = just
             ; _<*>′_      = ap

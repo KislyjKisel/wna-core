@@ -11,7 +11,6 @@ open import Wna.Monad.Trans         using (MonT)
 open import Wna.Primitive
 
 record ExceptT {ℓ} (E : Type ℓ) (M : Fun ℓ) (A : Type ℓ) : Type ℓ where
-    inductive
     no-eta-equality
     pattern
     constructor mkExcept

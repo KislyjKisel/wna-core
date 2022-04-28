@@ -1,0 +1,3 @@
+name: wna-core-tests
+depend: standard-library-2.0, wna-core
+include: .

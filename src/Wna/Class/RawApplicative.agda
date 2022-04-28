@@ -53,12 +53,13 @@ mutual
         infix  4 _⊗_
 
         field
-            pure       : FT.pure
-            _<*>_      : FT._<*>_
-            liftA2     : FT.liftA2
-            _<*_       : FT._<*_
-            _*>_       : FT._*>_
-            rawFunctor : ∀{i j} → RawFunctor (F i j)
+            pure   : FT.pure
+            _<*>_  : FT._<*>_
+            liftA2 : FT.liftA2
+            _<*_   : FT._<*_
+            _*>_   : FT._*>_
+
+            overlap ⦃ rawFunctor ⦄ : ∀{i j} → RawFunctor (F i j)
 
         rawApplicative : ∀{i} → RawApplicative (F i i)
         rawApplicative = record

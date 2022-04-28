@@ -11,7 +11,7 @@ open import Wna.Class.RawMonad.LevelPolymorphic     using (RawMonad′; module M
 open import Wna.Primitive
 
 open import Data.Maybe.Base public
-    hiding (_>>=_)
+    renaming (_>>=_ to mb-bind)
 
 MaybeT′ : MonT′
 MaybeT′ = _∘′ Maybe

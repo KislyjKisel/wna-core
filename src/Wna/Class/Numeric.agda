@@ -49,8 +49,35 @@ record Divide {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
 
 open Divide ⦃...⦄ public
 
+record Modulo {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
+    infixl 7 _%_
+    field
+        {r} : _
+        R   : Type r
+        _%_ : A → B → R
+
+open Modulo ⦃...⦄ public
+
+record Quotient {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
+    infixl 7 _quot_
+    field
+        {r} : _
+        R   : Type r
+        _quot_ : A → B → R
+
+open Quotient ⦃...⦄ public
+
+record Remainder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
+    infixl 7 _rem_
+    field
+        {r} : _
+        R   : Type r
+        _rem_ : A → B → R
+
+open Remainder ⦃...⦄ public
+
 record Square {aℓ} (A : Type aℓ) : Typeω where
-    infixl 8 _²
+    infix 8 _²
     field
         {r} : _
         R   : Type r
@@ -58,14 +85,14 @@ record Square {aℓ} (A : Type aℓ) : Typeω where
 
 open Square ⦃...⦄ public
 
-record Inverse {aℓ} (A : Type aℓ) : Typeω where
-    infixl 8 _⁻¹
+record Reciprocal {aℓ} (A : Type aℓ) : Typeω where
+    infix 7 1/_
     field
         {r} : _
         R   : Type r
-        _⁻¹ : A → R
+        1/_ : A → R
 
-open Inverse ⦃...⦄ public
+open Reciprocal ⦃...⦄ public
 
 record Power {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 8 _^_

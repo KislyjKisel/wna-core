@@ -2,7 +2,7 @@
 
 module Wna.Monad.Identity.Instances where
 
-open import Wna.Monad.Identity.Properties
+open import Wna.Monad.Identity.Bundles
 
 instance
     _ = rawFunctor

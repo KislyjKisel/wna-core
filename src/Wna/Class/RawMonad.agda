@@ -35,9 +35,10 @@ mutual
         infixr 1 _=<<_ _<=<_
 
         field
-            _>>=_           : FT._>>=_
-            join            : FT.join
-            rawIApplicative : RawIApplicative F
+            _>>=_ : FT._>>=_
+            join  : FT.join
+            
+            overlap ⦃ rawIApplicative ⦄ : RawIApplicative F
 
         open RawIApplicative rawIApplicative public
 

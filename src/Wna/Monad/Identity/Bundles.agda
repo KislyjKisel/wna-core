@@ -15,9 +15,3 @@ open RawMonad′ rawMonad′ public
     ; rawApplicative; rawApplicative′
     ; rawFunctor; rawFunctor′
     )
-
-rawMonadT′ : RawMonadT′ IdentityT
-rawMonadT′ ⦃ M ⦄ = M
-
-rawMonadIT′ : RawMonadIT′ IdentityIT
-rawMonadIT′ ⦃ M ⦄ = M
