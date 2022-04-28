@@ -2,12 +2,13 @@
 
 module Wna.Monad.State.Base where
 
-open import Data.Product                using (_×_; _,_)
+open import Data.Product                using (_×_; _,_; proj₁; proj₂)
 open import Data.Unit.Polymorphic       using (⊤)
+open import Function.Base               using (_∘′_)
 open import Wna.Class.RawApplicative    using (IFun; Fun⇒IFun)
 open import Wna.Class.RawFunctor        using (Fun)
 open import Wna.Class.RawMonad          using (RawIMonad; RawMonad; module IMonadFT)
-open import Wna.Monad.Identity          using (Identity)
+open import Wna.Monad.Identity          using (Identity; runIdentity)
 open import Wna.Monad.Trans             using (MonT; MonIT; MonTI)
 open import Wna.Primitive
 
@@ -16,7 +17,17 @@ record StateTI {ℓ} (M : Fun ℓ) (i j : Type ℓ) (A : Type ℓ) : Type ℓ wh
     pattern
     constructor mkState
     field
-        runState : i → M (A × j) 
+        runState : i → M (A × j)
+
+    evalState : ⦃ M-monad : RawMonad M ⦄ → i → M A
+    evalState ⦃ M-monad ⦄ = fmap proj₁ ∘′ runState
+        where
+            open RawMonad M-monad using (fmap)
+
+    execState : ⦃ M-monad : RawMonad M ⦄ → i → M j
+    execState ⦃ M-monad ⦄ = fmap proj₂ ∘′ runState
+        where
+            open RawMonad M-monad using (fmap)
 
 open StateTI public
 
@@ -31,6 +42,15 @@ StateIT S M i j = StateT S (M i j)
 
 State : ∀{ℓ} → Type ℓ → Fun ℓ
 State S = StateT S Identity
+
+runState′ : ∀{ℓ} {S A : Type ℓ} → State S A → S → A × S
+runState′ (mkState f) x = runIdentity (f x)
+
+evalState′ : ∀{ℓ} {S A : Type ℓ} → State S A → S → A
+evalState′ (mkState f) x = proj₁ (runIdentity (f x))
+
+execState′ : ∀{ℓ} {S A : Type ℓ} → State S A → S → S
+execState′ (mkState f) x = proj₂ (runIdentity (f x))
 
 module _ {ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ where
     private
@@ -50,19 +70,3 @@ module _ {ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ where
 
     iput : ∀{i j} → j → StateTI M i j ⊤
     iput j = mkState λ i → M.pure (_ , j)
-
-module _ {sℓ} {S : Type sℓ} {iℓ} {I : Type iℓ} {M : IFun I sℓ} ⦃ M-imonad : RawIMonad M ⦄ where
-    private
-        module M = RawIMonad M-imonad
-
-    -- pure″ : IMonadFT.pure (StateIT S M)
-    -- pure″ x = mkState λ s → M.pure (x , s) 
-
-    _>>=″_ : IMonadFT._>>=_ (StateIT S M)
-    (mkState mx) >>=″ f = mkState λ s → mx s M.>>= λ (x , s') → runState (f x) s'
-
-    -- get″ : ∀{i} → StateIT S M i i S
-    -- get″ = mkState λ s → M.pure (s , s)
-
-    -- put″ : ∀{i} → S → StateIT S M i i ⊤
-    -- put″ s' = mkState λ _ → M.pure (_ , s')

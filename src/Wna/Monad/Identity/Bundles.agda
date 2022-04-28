@@ -2,16 +2,13 @@
 
 module Wna.Monad.Identity.Bundles where
 
-open import Wna.Class.RawMonad.LevelPolymorphic using (RawMonad′; module MkRawMonad′)
+open import Wna.Class.RawMonad using (RawMonad; module MkRawMonad)
 open import Wna.Monad.Identity.Base
 open import Wna.Monad.Trans
 
-rawMonad′ : RawMonad′ Identity
-rawMonad′ = MkRawMonad′.from:pure′,>>=′ pure′ _>>=′_
+module _ {ℓ} where
+    rawMonad : RawMonad (Identity {ℓ = ℓ})
+    rawMonad = MkRawMonad.from:pure,>>= pure _>>=_
 
-open RawMonad′ rawMonad′ public
-    using
-    ( rawMonad
-    ; rawApplicative; rawApplicative′
-    ; rawFunctor; rawFunctor′
-    )
+    open RawMonad rawMonad public
+        using (rawApplicative; rawFunctor)

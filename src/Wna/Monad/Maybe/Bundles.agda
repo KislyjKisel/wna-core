@@ -2,54 +2,46 @@
 
 module Wna.Monad.Maybe.Bundles where
 
-open import Function.Base                               using (id; _∘′_)
-open import Wna.Class.Monad.Trans                       using (Trans; Trans′)
-open import Wna.Class.RawApplicative.LevelPolymorphic   using (module MkRawApplicative′)
-open import Wna.Class.RawFunctor.LevelPolymorphic       using (Fun′; module MkRawFunctor′)
-open import Wna.Class.RawMonad                          using (RawMonad; module MkRawMonad)
-open import Wna.Class.RawMonad.LevelPolymorphic         using (RawMonad′; module MkRawMonad′)
-open import Wna.Monad.Identity                          using (Identity)
-open import Wna.Monad.Identity.Bundles as Id            using ()
+open import Data.Maybe.Base                  renaming (_>>=_ to mb-bind)
+open import Function.Base                    using (id; _∘_)
+open import Wna.Class.Monad.Trans            using (Trans)
+open import Wna.Class.RawApplicative         using (module MkRawApplicative)
+open import Wna.Class.RawFunctor             using (Fun; module MkRawFunctor)
+open import Wna.Class.RawMonad               using (RawMonad; module MkRawMonad)
+open import Wna.Monad.Identity               using (Identity)
+open import Wna.Monad.Identity.Bundles as Id using ()
 open import Wna.Monad.Maybe.Base
-open import Wna.Monad.Trans                             using (RawMonadT; RawMonadT′)
+open import Wna.Monad.Trans
 
-rawMonad′ : RawMonad′ Maybe
-rawMonad′ = record
-        { _>>=′_           = mb-bind
-        ; join′            = MkRawMonad′.>>=′⇒join′ mb-bind
-        ; rawIApplicative′ = record
-            { pure′       = just
-            ; _<*>′_      = ap
-            ; liftA2′     = MkRawApplicative′.<$>′,<*>′⇒liftA2′ map ap
-            ; _<*′_       = MkRawApplicative′.<$>′,<*>′⇒<*′ map ap
-            ; _*>′_       = MkRawApplicative′.<$>′,<*>′⇒*>′ map ap
-            ; rawFunctor′ = record
-                { _<$>′_ = map
-                ; _<$′_  = MkRawFunctor′.<$>′⇒<$′ map
+module _ {ℓ} where
+
+    rawMonad : RawMonad (Maybe {a = ℓ})
+    rawMonad = record
+            { _>>=_           = mb-bind
+            ; join            = MkRawMonad.>>=⇒join mb-bind
+            ; rawIApplicative = record
+                { pure       = just
+                ; _<*>_      = ap
+                ; liftA2     = MkRawApplicative.<$>,<*>⇒liftA2 map ap
+                ; _<*_       = MkRawApplicative.<$>,<*>⇒<* map ap
+                ; _*>_       = MkRawApplicative.<$>,<*>⇒*> map ap
+                ; rawFunctor = record
+                    { _<$>_ = map
+                    ; _<$_  = MkRawFunctor.<$>⇒<$ map
+                    }
                 }
             }
-        }
 
-open RawMonad′ rawMonad′ public using
-    ( rawMonad
-    ; rawApplicative; rawApplicative′
-    ; rawFunctor; rawFunctor′
-    )
+    rawMonadT : RawMonadT (MaybeT {ℓ})
+    rawMonadT ⦃ M ⦄ = MkRawMonad.from:pure,>>= pure _>>=_
 
-rawMonadT′ : RawMonadT′ MaybeT′
-rawMonadT′ ⦃ M ⦄ = MkRawMonad′.from:pure′,>>=′ pure′ _>>=′_
-    where module M = RawMonad′ M
+    rawApplicative : RawMonadT-RawApplicative (MaybeT {ℓ})
+    rawApplicative = RawMonad.rawApplicative rawMonadT
 
-rawMonadT : ∀{ℓ} → RawMonadT (MaybeT {ℓ})
-rawMonadT ⦃ M ⦄ = MkRawMonad.from:pure,>>= pure _>>=_
-    where module M = RawMonad M
+    rawFunctor : RawMonadT-RawFunctor (MaybeT {ℓ})
+    rawFunctor = RawMonad.rawFunctor rawMonadT
 
-trans′ : Trans′ (MaybeT′)
-trans′ = record
-    { lift′ = lift′
-    }
-
-trans : ∀{ℓ} → Trans (MaybeT {ℓ})
-trans = record
-    { lift = lift
-    }
+    trans : Trans (MaybeT {ℓ = ℓ})
+    trans = record
+        { lift = lift
+        } 

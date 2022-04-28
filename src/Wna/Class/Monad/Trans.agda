@@ -4,9 +4,7 @@ module Wna.Class.Monad.Trans where
 
 open import Wna.Monad.Trans
 open import Wna.Class.RawFunctor                    using (Fun)
-open import Wna.Class.RawFunctor.LevelPolymorphic   using (Fun′)
 open import Wna.Class.RawMonad                      using (RawMonad)
-open import Wna.Class.RawMonad.LevelPolymorphic     using (RawMonad′)
 open import Wna.Primitive
 
 record Trans {ℓ} (T : MonT ℓ ℓ) : Type (ℓ↑ ℓ) where
@@ -14,9 +12,3 @@ record Trans {ℓ} (T : MonT ℓ ℓ) : Type (ℓ↑ ℓ) where
         lift : ∀{M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ {A : Type ℓ} → M A → T M A
 
 open Trans ⦃...⦄ public
-
-record Trans′ (T : MonT′) : Typeω where
-    field
-        lift′ : ∀{M : Fun′} ⦃ M-monad : RawMonad′ M ⦄ {aℓ} {A : Type aℓ} → M A → T M A
-
-open Trans′ ⦃...⦄ public

@@ -15,4 +15,8 @@ open import Wna.Monad.Reader public
     using (Reader; ReaderT; ReaderIT; mkReader; runReader)
 
 open import Wna.Monad.State public
-    using (IState; State; StateT; StateIT; StateTI; mkState; runState)
+    using
+    ( IState ; State ; StateT ; StateIT ; StateTI ; mkState
+    ; runState ; evalState ; execState
+    ; runState' ; evalState' ; execState'
+    )

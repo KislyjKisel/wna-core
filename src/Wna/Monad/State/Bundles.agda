@@ -63,15 +63,3 @@ state ⦃ M-monad ⦄ {S = S} = record
     ; get = iget
     ; put = iput
     }
-
-state″ : ∀{ℓ} {I : Type ℓ} {M : IFun I ℓ} ⦃ M-monad : RawIMonad M ⦄ {S : Type ℓ} {i : I} →
-        CS.State (StateIT S M i i) ⦃ RawIMonad.rawMonad (rawMonadIT {S = S} ⦃ M-monad ⦄) {i = i} ⦄
-state″ ⦃ M-monad ⦄ {S = S} = record
-    { S   = S
-    ; get = iget
-    ; put = iput
-    }
-    where
-    instance _ = RawIMonad.rawMonad M-monad
-
--- todo: fix IT vs TI making incompatible unindexed monads (?)
