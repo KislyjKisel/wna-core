@@ -1,6 +1,6 @@
 {-# OPTIONS --without-K --safe #-}
 
-module Wna.Prelude.Computing.Instanced where
+module Wna.Prelude.Instanced where
 
 open import Wna.Class.RawFunctor using (RawFunctor)
 
@@ -8,14 +8,6 @@ open RawFunctor ⦃...⦄ public
     using
     ( fmap
     ; _<$>_ ; _<$_ ; _<&>_
-    )
-
-open import Wna.Class.RawFunctor.LevelPolymorphic using (RawFunctor′)
-
-open RawFunctor′ ⦃...⦄ public
-    using
-    ( fmap′
-    ; _<$>′_ ; _<$′_ ; _<&>′_
     )
 
 open import Wna.Class.RawApplicative using (RawApplicative)
@@ -26,14 +18,6 @@ open RawApplicative ⦃...⦄ public
     ; _<*>_ ; _<*_ ; _*>_
     )
 
-open import Wna.Class.RawApplicative.LevelPolymorphic using (RawApplicative′)
-
-open RawApplicative′ ⦃...⦄ public
-    using
-    ( pure′
-    ; _<*>′_ ; _<*′_ ; _*>′_
-    )
-
 open import Wna.Class.RawMonad using (RawMonad)
 
 open RawMonad ⦃...⦄ public
@@ -42,38 +26,30 @@ open RawMonad ⦃...⦄ public
     ; _>>=_ ; _>=>_ ; _>>_ ; _=<<_ ; _<=<_
     )
 
-open import Wna.Class.RawMonad.LevelPolymorphic using (RawMonad′)
-
-open RawMonad′ ⦃...⦄ public
-    using
-    ( return′ ; join′
-    ; _>>=′_ ; _>=>′_ ; _>>′_ ; _=<<′_ ; _<=<′_
-    )
-
 --
 
 open import Wna.Class.Monad.Trans public
-    using (lift; lift′)
+    using (lift)
 
 --
 
 open import Wna.Class.Monad.Ask public
-    using (ask; ask′)
+    using (ask)
 
 open import Wna.Class.Monad.Handle public
-    using (handle; handle′)
+    using (handle)
 
 open import Wna.Class.Monad.Local public
-    using (local; local′)
+    using (local)
 
 open import Wna.Class.Monad.Raise public
-    using (raise; raise′)
+    using (raise)
 
 open import Wna.Class.Monad.State public
-    using (get; put; get′; put′; iget; iput; iget′; iput′)
+    using (get; put; iget; iput)
 
 open import Wna.Class.Monad.Tell public
-    using (tell; tell′)
+    using (tell)
 
 --
 

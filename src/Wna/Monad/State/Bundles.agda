@@ -18,11 +18,6 @@ rawMonadTI = MkRawIMonad.from:pure,>>= pure _>>=_
 rawIMonad : ∀{ℓ} → RawIMonad (IState {ℓ = ℓ})
 rawIMonad = rawMonadTI ⦃ Id.rawMonad ⦄
 
-rawMonadIT : ∀{ℓ} {S : Type ℓ} → RawMonadIT (StateIT S)
-rawMonadIT ⦃ M-imonad ⦄ = MkRawIMonad.from:pure,>>= pure _>>=″_
-    where
-    instance _ = RawIMonad.rawMonad M-imonad
-
 rawMonadT : ∀{ℓ} {S : Type ℓ} → RawMonadT (StateT S)
 rawMonadT = MkRawMonad.from:pure,>>= pure _>>=_
 

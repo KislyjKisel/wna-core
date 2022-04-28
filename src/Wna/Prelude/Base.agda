@@ -6,7 +6,7 @@ open import Wna.Monad.Identity public
     using (Identity; mkIdentity; runIdentity)
 
 open import Wna.Monad.Maybe public
-    using (Maybe; MaybeT; MaybeT′)
+    using (Maybe; MaybeT)
 
 open import Wna.Monad.Except public
     using (Except; ExceptT; mkExcept; runExcept)
@@ -18,5 +18,5 @@ open import Wna.Monad.State public
     using
     ( IState ; State ; StateT ; StateIT ; StateTI ; mkState
     ; runState ; evalState ; execState
-    ; runState' ; evalState' ; execState'
+    ; runState′ ; evalState′ ; execState′
     )
