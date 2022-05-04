@@ -8,7 +8,7 @@ open import Wna.Primitive
 
 record Raise {ℓ} (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
-        overlap ⦃ monad ⦄ : RawMonad M
+        overlap ⦃ rawMonad ⦄ : RawMonad M
         
         E     : Type ℓ
         raise : E → ∀{A} → M A 

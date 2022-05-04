@@ -10,20 +10,20 @@ open import Wna.Primitive
 
 record State {ℓ} (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
-        overlap ⦃ monad ⦄ : RawMonad M
+        overlap ⦃ rawMonad ⦄ : RawMonad M
 
         S   : Type ℓ
         get : M S
         put : S → M ⊤
     
     modify : (S → S) → M ⊤
-    modify f = let open RawMonad M-monad in do
+    modify f = let open RawMonad rawMonad in do
         x ← get
         put (f x)
         pure _
 
     gets : ∀{A} → (S → A) → M A
-    gets f = let open RawMonad M-monad in do
+    gets f = let open RawMonad rawMonad in do
         x ← get
         pure (f x)
 
@@ -32,19 +32,19 @@ open State ⦃...⦄ public
 
 record IState {ℓ} (M : IFun (Type ℓ) ℓ) : Type (ℓ↑ ℓ) where
     field
-        overlap ⦃ imonad ⦄ : RawIMonad M
+        overlap ⦃ rawIMonad ⦄ : RawIMonad M
         
         iget : ∀{i} → M i i i
         iput : ∀{i j} → j → M i j ⊤
 
     imodify : ∀{i j} → (i → j) → M i j ⊤
-    imodify f = let open RawIMonad M-monad in do
+    imodify f = let open RawIMonad rawIMonad in do
         x ← iget
         iput (f x)
         pure _
 
     igets : ∀{i A} → (i → A) → M i i A
-    igets f = let open RawIMonad M-monad in do
+    igets f = let open RawIMonad rawIMonad in do
         x ← iget
         pure (f x)
 

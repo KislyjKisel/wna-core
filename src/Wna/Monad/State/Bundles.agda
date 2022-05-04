@@ -45,16 +45,18 @@ trans = record
     }
 
 
-istate : ∀{ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ → CS.IState (StateTI M) ⦃ rawMonadTI ⦃ M-monad ⦄ ⦄
+istate : ∀{ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ → CS.IState (StateTI M)
 istate = record
-    { iget = iget
-    ; iput = iput
+    { iget      = iget
+    ; iput      = iput
+    ; rawIMonad = rawMonadTI
     }
 
 state : ∀{ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ {S : Type ℓ} →
-        CS.State (StateT S M) ⦃ rawMonadT ⦃ M-monad ⦄ ⦄
-state ⦃ M-monad ⦄ {S = S} = record
-    { S   = S
-    ; get = iget
-    ; put = iput
+        CS.State (StateT S M)
+state = record
+    { S        = _
+    ; get      = iget
+    ; put      = iput
+    ; rawMonad = rawMonadT
     }

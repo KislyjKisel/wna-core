@@ -2,7 +2,6 @@
 
 module Wna.Monad.Reader.Bundles where
 
-open import Function.Base                       using (_$_)
 open import Wna.Class.Monad.Ask                 using (Ask)
 open import Wna.Class.Monad.Local               using (Local)
 open import Wna.Class.Monad.Trans               using (Trans)
@@ -34,16 +33,18 @@ module _ {rℓ} {R : Type rℓ} where
     rawFunctor : RawMonadT-RawFunctor (ReaderT R)
     rawFunctor = RawMonad.rawFunctor rawMonadT
 
-    ask : ∀{iℓ} {I : Type iℓ} {i : I} {M : IFun I rℓ} ⦃ M-monad : RawIMonad M ⦄ → Ask (ReaderIT R M i i) ⦃ RawIMonad.rawMonad $ rawMonadIT ⦃ M-monad ⦄ ⦄
-    ask ⦃ M-monad ⦄ = record
-        { E   = R
-        ; ask = Re.ask
+    ask : ∀{iℓ} {I : Type iℓ} {i : I} {M : IFun I rℓ} ⦃ M-monad : RawIMonad M ⦄ → Ask (ReaderIT R M i i)
+    ask = record
+        { E        = R
+        ; ask      = Re.ask
+        ; rawMonad = RawIMonad.rawMonad rawMonadIT
         }
 
-    local : ∀{iℓ} {I : Type iℓ} {i : I} {M : IFun I rℓ} ⦃ M-monad : RawIMonad M ⦄ → Local (ReaderIT R M i i) ⦃ RawIMonad.rawMonad $ rawMonadIT ⦃ M-monad ⦄ ⦄
-    local {I = I} {i = i} ⦃ M-monad ⦄ = record
-        { local = λ f → Re.local {I = I} f
-        ; M-ask = ask
+    local : ∀{iℓ} {I : Type iℓ} {i : I} {M : IFun I rℓ} ⦃ M-monad : RawIMonad M ⦄ → Local (ReaderIT R M i i)
+    local = record
+        { local    = λ f → Re.local f
+        ; M-ask    = ask
+        ; rawMonad = RawIMonad.rawMonad rawMonadIT
         }
 
     trans : Trans (ReaderT R)

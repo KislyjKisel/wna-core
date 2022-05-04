@@ -8,7 +8,7 @@ open import Wna.Primitive
 
 record Ask {ℓ} (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
-        overlap ⦃ monad ⦄ : RawMonad M
+        overlap ⦃ rawMonad ⦄ : RawMonad M
         
         E   : Type ℓ
         ask : M E

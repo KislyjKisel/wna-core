@@ -2,8 +2,6 @@
 
 module Wna.Monad.Except.Bundles where
 
-open import Data.Sum.Base                       using (inj₁; inj₂)
-open import Function.Base                       using (_$_)
 open import Wna.Class.Monad.Handle              using (Handle)
 open import Wna.Class.Monad.Raise               using (Raise)
 open import Wna.Class.Monad.Trans
@@ -18,14 +16,11 @@ open import Wna.Primitive
 module _ {eℓ} {E : Type eℓ} where
  
     rawMonadT : RawMonadT (ExceptT E)
-    rawMonadT ⦃ M-monad ⦄ = record
-        { rawIApplicative = MkRawMonad.pure,>>=⇒rawApplicative (pure ⦃ M-monad ⦄) bind
-        ; _>>=_           = bind
-        ; join            = MkRawMonad.>>=⇒join bind
+    rawMonadT = record
+        { rawIApplicative = MkRawMonad.pure,>>=⇒rawApplicative pure _>>=_
+        ; _>>=_           = _>>=_
+        ; join            = MkRawMonad.>>=⇒join _>>=_
         }
-        where
-        module M = RawMonad M-monad
-        bind = _>>=_ ⦃ M-monad ⦄
 
     rawMonad : RawMonad (Except E)
     rawMonad = rawMonadT ⦃ Id.rawMonad ⦄
@@ -36,18 +31,19 @@ module _ {eℓ} {E : Type eℓ} where
     rawFunctor : RawMonadT-RawFunctor (ExceptT E)
     rawFunctor = RawMonad.rawFunctor rawMonadT
 
-    raise : ∀{M} ⦃ M-monad : RawMonad M ⦄ → Raise (ExceptT E M) ⦃ rawMonadT ⦃ M-monad ⦄ ⦄
-    raise ⦃ M-monad ⦄ = record
-        { E     = _
-        ; raise = Ex.raise
+    raise : ∀{M} ⦃ M-monad : RawMonad M ⦄ → Raise (ExceptT E M)
+    raise = record
+        { E        = _
+        ; raise    = Ex.raise
+        ; rawMonad = rawMonadT
         }
 
-    handle : ∀{M} ⦃ M-monad : RawMonad M ⦄ → Handle (ExceptT E M) ⦃ rawMonadT ⦃ M-monad ⦄ ⦄
-    handle ⦃ M-monad ⦄ = record
-        { E      = _
-        ; handle = Ex.handle
+    handle : ∀{M} ⦃ M-monad : RawMonad M ⦄ → Handle (ExceptT E M)
+    handle = record
+        { E        = _
+        ; handle   = Ex.handle
+        ; rawMonad = rawMonadT
         }
-        where open RawMonad M-monad
 
     trans : Trans (ExceptT E)
     trans = record
