@@ -8,8 +8,10 @@ open import Wna.Class.RawFunctor                        using (Fun)
 open import Wna.Class.RawMonad                          using (RawMonad; RawIMonad)
 open import Wna.Primitive
 
-record State {ℓ} (M : Fun ℓ) ⦃ M-monad : RawMonad M ⦄ : Type (ℓ↑ ℓ) where
+record State {ℓ} (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
+        overlap ⦃ monad ⦄ : RawMonad M
+
         S   : Type ℓ
         get : M S
         put : S → M ⊤
@@ -28,8 +30,10 @@ record State {ℓ} (M : Fun ℓ) ⦃ M-monad : RawMonad M ⦄ : Type (ℓ↑ ℓ
 open State ⦃...⦄ public
     using (get; put; modify; gets)
 
-record IState {ℓ} (M : IFun (Type ℓ) ℓ ) ⦃ M-monad : RawIMonad M ⦄ : Type (ℓ↑ ℓ) where
+record IState {ℓ} (M : IFun (Type ℓ) ℓ) : Type (ℓ↑ ℓ) where
     field
+        overlap ⦃ imonad ⦄ : RawIMonad M
+        
         iget : ∀{i} → M i i i
         iput : ∀{i j} → j → M i j ⊤
 

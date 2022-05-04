@@ -12,3 +12,4 @@ record Trans {ℓ} (T : MonT ℓ ℓ) : Type (ℓ↑ ℓ) where
         lift : ∀{M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ {A : Type ℓ} → M A → T M A
 
 open Trans ⦃...⦄ public
+    using (lift)

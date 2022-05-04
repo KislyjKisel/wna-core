@@ -7,8 +7,10 @@ open import Wna.Class.RawFunctor                    using (Fun)
 open import Wna.Class.RawMonad                      using (RawMonad)
 open import Wna.Primitive
 
-record Tell {ℓ} (M : Fun ℓ) ⦃ M-monad : RawMonad M ⦄ : Type (ℓ↑ ℓ) where
+record Tell {ℓ} (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
+        overlap ⦃ monad ⦄ : RawMonad M
+
         L    : Type ℓ
         tell : L → M ⊤
 
