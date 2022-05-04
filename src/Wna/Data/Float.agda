@@ -2,20 +2,20 @@
 
 module Wna.Data.Float where
 
-open import Data.Float.Base public
 open import Data.Bool.Base using (if_then_else_)
+
+open import Data.Float.Base public
 
 infixl 6 _∨_
 infixl 7 _∧_
 infix  7 1/_
-infixl 8 _^_
 infix  8 _²
 
 _² : Float → Float
 x ² = x * x
 
 1/_ : Float → Float
-1/ x = 1 ÷ x
+1/ x = 1.0 ÷ x
 
 _∨_ : Float → Float → Float
 x ∨ y = if x <ᵇ y then y else x

@@ -1,12 +1,12 @@
 {-# OPTIONS --without-K --safe #-}
 
-module Wna.Data.List.Instances where
+module Wna.Data.List.Bundles where
 
 open import Data.List.Base
 open import Wna.Class.Foldable using (Foldable; module MkFoldable)
 
-List-Foldable : ∀{a} → Foldable (List {a})
-List-Foldable = record
+foldable : ∀{a} → Foldable (List {a})
+foldable = record
     { foldl    = foldl
     ; foldr    = foldr
     ; toList   = λ x → x
