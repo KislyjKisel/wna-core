@@ -2,12 +2,12 @@
 
 module Wna.Data.Container.Monadic where
 
-open import Data.Container.Core using (Container; ⟦_⟧)
-open import Data.Container.Combinator as Cc using ()
-open import Data.Container.Combinator.Properties using (module Composition)
-open import Function.Inverse using (Inverse)
-open import Function.Equality as FunEq using ()
-open import Function.Base using (_$_; _∘′_)
+open import Data.Container.Combinator            as Cc    using ()
+open import Data.Container.Combinator.Properties          using (module Composition)
+open import Data.Container.Core                           using (Container; ⟦_⟧)
+open import Function.Base                                 using (_$_; _∘′_)
+open import Function.Equality                    as FunEq using ()
+open import Function.Inverse                              using (Inverse)
 open import Wna.Primitive
 
 ∘-pure : ∀{ℓ} {C₁ C₂ : Container ℓ ℓ} → (∀{A : Type ℓ} → A → ⟦ C₁ ⟧ A) →
