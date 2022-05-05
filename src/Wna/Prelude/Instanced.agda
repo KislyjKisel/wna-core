@@ -57,7 +57,7 @@ open import Wna.Class.Cast public
     using (cast)
 
 open import Wna.Class.Foldable public
-    using (foldl; foldr; is-empty; length; _∈ᵇ_)
+    using (foldl; foldr; fold; foldMap)
 
 open import Wna.Class.Numeric public
     using
