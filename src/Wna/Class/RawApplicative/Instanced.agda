@@ -5,4 +5,7 @@ module Wna.Class.RawApplicative.Instanced where
 open import Wna.Class.RawApplicative using (RawIApplicative)
 
 open RawIApplicative ⦃...⦄ public
-    hiding (rawFunctor)
+    using
+    ( pure ; liftA2
+    ; _<*>_ ; _<*_ ; _*>_
+    )
