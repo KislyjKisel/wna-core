@@ -37,32 +37,25 @@ open import Wna.Class.DecOrder public
 -- Monad classes
 
 open import Wna.Class.Monad.Trans public
-    renaming (Trans to MonadTrans)
-    using ()
+    using (MonadTrans)
 
 open import Wna.Class.Monad.Ask public
-    renaming (Ask to MonadAsk)
-    using ()
+    using (MonadAsk)
 
 open import Wna.Class.Monad.Handle public
-    renaming (Handle to MonadHandle)
-    using ()
+    using (MonadHandle)
 
 open import Wna.Class.Monad.Local public
-    renaming (Local to MonadLocal)
-    using ()
+    using (MonadLocal)
 
 open import Wna.Class.Monad.Raise public
-    renaming (Raise to MonadRaise)
-    using ()
+    using (MonadRaise)
 
 open import Wna.Class.Monad.State public
-    renaming (State to MonadState)
-    using ()
+    using (MonadState; IMonadState)
 
 open import Wna.Class.Monad.Tell public
-    renaming (Tell to MonadTell)
-    using ()
+    using (MonadTell)
 
 -- Monads
 

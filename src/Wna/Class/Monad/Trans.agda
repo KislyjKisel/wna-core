@@ -7,9 +7,9 @@ open import Wna.Class.RawFunctor                    using (Fun)
 open import Wna.Class.RawMonad                      using (RawMonad)
 open import Wna.Primitive
 
-record Trans {ℓ} (T : MonT ℓ ℓ) : Type (ℓ↑ ℓ) where
+record MonadTrans {ℓ} (T : MonT ℓ ℓ) : Type (ℓ↑ ℓ) where
     field
         lift : ∀{M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ {A : Type ℓ} → M A → T M A
 
-open Trans ⦃...⦄ public
+open MonadTrans ⦃...⦄ public
     using (lift)

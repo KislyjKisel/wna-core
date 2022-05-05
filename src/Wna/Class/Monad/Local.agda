@@ -3,20 +3,20 @@
 module Wna.Class.Monad.Local where
 
 open import Data.Unit            using (⊤)
-open import Wna.Class.Monad.Ask  using (Ask)
+open import Wna.Class.Monad.Ask  using (MonadAsk)
 open import Wna.Class.RawFunctor using (Fun)
 open import Wna.Class.RawMonad   using (RawMonad)
 open import Wna.Primitive
 
-record Local {ℓ} (M : Fun ℓ) : Type (ℓ↑ ℓ) where
+record MonadLocal {ℓ} (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
         overlap ⦃ rawMonad ⦄ : RawMonad M
-        overlap ⦃ M-ask ⦄ : Ask M
+        overlap ⦃ M-ask ⦄ : MonadAsk M
     
-    open Ask M-ask
+    open MonadAsk M-ask
     
     field
         local : (E → E) → {A : Type ℓ} → M A → M A
 
-open Local ⦃...⦄ public
+open MonadLocal ⦃...⦄ public
     using (local)
