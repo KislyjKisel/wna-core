@@ -20,14 +20,14 @@ record StateTI {ℓ} (M : Fun ℓ) (i j : Type ℓ) (A : Type ℓ) : Type ℓ wh
         runState : i → M (A × j)
 
     evalState : ⦃ M-monad : RawMonad M ⦄ → i → M A
-    evalState ⦃ M-monad ⦄ = fmap proj₁ ∘′ runState
+    evalState ⦃ M-monad ⦄ = map proj₁ ∘′ runState
         where
-            open RawMonad M-monad using (fmap)
+            open RawMonad M-monad using (map)
 
     execState : ⦃ M-monad : RawMonad M ⦄ → i → M j
-    execState ⦃ M-monad ⦄ = fmap proj₂ ∘′ runState
+    execState ⦃ M-monad ⦄ = map proj₂ ∘′ runState
         where
-            open RawMonad M-monad using (fmap)
+            open RawMonad M-monad using (map)
 
 open StateTI public
 

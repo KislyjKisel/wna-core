@@ -22,4 +22,4 @@ _>>=_ ⦃ M-monad ⦄ x f = x M.>>= maybe′ f (M.return nothing)
     where module M = RawMonad M-monad
 
 lift : ∀{ℓ} {M} ⦃ M-monad : RawMonad M ⦄ {A : Type ℓ} → M A → MaybeT M A
-lift ⦃ M-monad ⦄ m = RawMonad.fmap M-monad just m
+lift ⦃ M-monad ⦄ m = RawMonad.map M-monad just m

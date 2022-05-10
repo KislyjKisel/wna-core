@@ -20,6 +20,8 @@ module IApplicativeFT {iℓ aℓ} {I : Type iℓ} (F : IFun I aℓ) where
     _<$>_ : Type (iℓ ℓ⊔ ℓ↑ aℓ)
     _<$>_ = ∀ {i j : I} → (FunctorFT._<$>_ (F i j))
 
+    map = _<$>_
+
     _<$_ : Type (iℓ ℓ⊔ ℓ↑ aℓ)
     _<$_ = ∀ {i j : I} → (FunctorFT._<$_ (F i j))
 

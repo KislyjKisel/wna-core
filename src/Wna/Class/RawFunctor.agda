@@ -13,6 +13,8 @@ module FunctorFT {aℓ bℓ} (F : Type aℓ → Type bℓ) where
     _<$>_ : Type (ℓ↑ aℓ ℓ⊔ bℓ)
     _<$>_ = ∀{A B : Type aℓ} → (A → B) → F A → F B
 
+    map = _<$>_
+
     _<$_ : Type (ℓ↑ aℓ ℓ⊔ bℓ)
     _<$_ = ∀{A B : Type aℓ} → A → F B → F A
 
@@ -26,7 +28,7 @@ record RawFunctor {aℓ bℓ} (F : Type aℓ → Type bℓ) : Type (ℓ↑ aℓ 
         _<$>_ : FT._<$>_
         _<$_  : FT._<$_
 
-    fmap = _<$>_
+    map = _<$>_
 
     _<&>_ : ∀{A B : Type aℓ} → F A → (A → B) → F B
     _<&>_ = flip _<$>_

@@ -32,7 +32,7 @@ _>>=_ ⦃ M-monad ⦄ (mkExcept mx) f = mkExcept $ mx M.>>= λ where
     where module M = RawMonad M-monad
 
 lift : ∀{ℓ} {E : Type ℓ} {M} ⦃ M-monad : RawMonad M ⦄ {A : Type ℓ} → M A → ExceptT E M A
-lift ⦃ M-monad ⦄ = mkExcept ∘′ RawMonad.fmap M-monad inj₂
+lift ⦃ M-monad ⦄ = mkExcept ∘′ RawMonad.map M-monad inj₂
 
 raise : ∀{ℓ} {E : Type ℓ} {M} ⦃ M-monad : RawMonad M ⦄ → E → ∀{A : Type ℓ} → ExceptT E M A
 raise ⦃ M-monad ⦄ e = mkExcept (RawMonad.pure M-monad (inj₁ e))
