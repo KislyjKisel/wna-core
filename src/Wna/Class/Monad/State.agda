@@ -8,11 +8,10 @@ open import Wna.Class.RawFunctor                        using (Fun)
 open import Wna.Class.RawMonad                          using (RawMonad; RawIMonad)
 open import Wna.Primitive
 
-record MonadState {ℓ} (M : Fun ℓ) : Type (ℓ↑ ℓ) where
+record MonadState {ℓ} (S : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
         overlap ⦃ rawMonad ⦄ : RawMonad M
 
-        S   : Type ℓ
         get : M S
         put : S → M ⊤
     
