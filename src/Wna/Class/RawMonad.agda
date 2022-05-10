@@ -82,6 +82,9 @@ module MkRawIMonad {iℓ aℓ} {I : Type iℓ} {F : IFun I aℓ} where
     >>=⇒join : FT._>>=_ → FT.join
     >>=⇒join _>>=_ = λ ffx → ffx >>= id
 
+    fmap,join⇒>>= : FT.map → FT.join → FT._>>=_
+    fmap,join⇒>>= map join x f = join (map f x)
+
     from:pure,>>= : FT.pure → FT._>>=_ → RawIMonad F
     from:pure,>>= pure _>>=_ = record
         { rawIApplicative = pure,>>=⇒rawIApplicative pure _>>=_
