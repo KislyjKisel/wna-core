@@ -2,45 +2,49 @@
 
 module Wna.Prelude.Instanced where
 
-open import Wna.Class.RawFunctor.Instanced      public
-open import Wna.Class.RawApplicative.Instanced  public
-open import Wna.Class.RawMonad.Instanced        public
-
---
-
-open import Wna.Class.Monad.Trans public
+import Wna.Class.Monad.Trans
+open Wna.Class.Monad.Trans.Instanced public
     using (lift)
 
-open import Wna.Class.Monad.Ask public
+import Wna.Class.Monad.Ask
+open Wna.Class.Monad.Ask.Instanced public
     using (ask)
 
-open import Wna.Class.Monad.Handle public
+import Wna.Class.Monad.Handle
+open Wna.Class.Monad.Handle.Instanced public
     using (handle)
 
-open import Wna.Class.Monad.Local public
+import Wna.Class.Monad.Local
+open Wna.Class.Monad.Local.Instanced public
     using (local)
 
-open import Wna.Class.Monad.Raise public
+import Wna.Class.Monad.Raise
+open Wna.Class.Monad.Raise.Instanced public
     using (raise)
 
-open import Wna.Class.Monad.State public
+import Wna.Class.Monad.State
+open Wna.Class.Monad.State.Instanced public
     using
     ( get ; put ; gets ; modify
     ; iget ; iput ; igets ; imodify
     )
 
-open import Wna.Class.Monad.Tell public
+import Wna.Class.Monad.Tell
+open Wna.Class.Monad.Tell.Instanced public
     using (tell)
 
 --
 
-open import Wna.Class.Cast public
+import Wna.Class.Cast
+open Wna.Class.Cast.Instanced public
     using (cast)
 
-open import Wna.Class.Foldable public
+import Wna.Class.Foldable
+open Wna.Class.Foldable.Instanced public
     using (foldl; foldr; fold; foldMap)
 
-open import Wna.Class.Numeric public
+import Wna.Class.Numeric
+open Wna.Class.Numeric.Instanced public
     using
     ( -_ ; _+_ ; _-_ ; _*_ ; _/_
     ; _%_ ; _quot_; _rem_ ; _^_
@@ -49,10 +53,12 @@ open import Wna.Class.Numeric public
     ; _∨_ ; _∧_
     )
 
-open import Wna.Class.RawEquality public
+import Wna.Class.RawEquality
+open Wna.Class.RawEquality.Instanced public
     using (_≡ᵇ_; _≢ᵇ_)
 
-open import Wna.Class.RawOrder public
+import Wna.Class.RawOrder
+open Wna.Class.RawOrder.Instanced public
     using
     ( _<ᵇ_ ; _>ᵇ_ ; _≮ᵇ_ ; _≯ᵇ_
     ; _≤ᵇ_ ; _≥ᵇ_ ; _≱ᵇ_ ; _≰ᵇ_
@@ -60,8 +66,10 @@ open import Wna.Class.RawOrder public
 
 --
 
-open import Wna.Class.DecEquality public
+import Wna.Class.DecEquality
+open Wna.Class.DecEquality.Instanced public
     using (_≈?_; _≡?_)
 
-open import Wna.Class.DecOrder public
+import Wna.Class.DecOrder
+open Wna.Class.DecOrder.Instanced public
     using (_<?_; _>?_; _≤?_; _≥?_)
