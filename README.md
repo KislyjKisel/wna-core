@@ -1,6 +1,7 @@
 # Contents
 
 * **Wna.Primitive** -- Agda.Primitive with renaming 
+* **Wna.Prelude** -- reexported frequently used definitions from this library and stdlib.
 * **Wna.Monad.\*** -- concrete monads.
 * **Wna.Class.\*** -- classes for use with instance arguments.
 
@@ -17,7 +18,6 @@ Modules with paths coinciding with standard library ones contain additional rela
 
 Indexed monads are prefixed with ```I``` (ex. ```IState```), like in standard library.
 Instances of records are named according to their type, camelCase (ex. ```rawIMonad```, ```imonad```).
-Level polymorphic variants are suffixed with ```′```.
 
 Type of transformer -- ```MonT```.
 Proof that for any ```Monad M```, ```MonT M``` is also a ```Monad``` -- ```MonadT```.
@@ -30,5 +30,5 @@ In this library corresponding transformers are named ```ReaderIT``` and ```State
 
 # Notes
 
-Default implementations of raws' functions are in ```MakeRaw*``` modules.
-Passing F ((I)Fun, the functor itself) explicitly to ```MakeRaw*```'s functions may help Agda to infer indices (?).
+Default implementations of raws' functions are in ```MkRaw*``` modules.
+Passing F ((I)Fun, the functor itself) explicitly to ```MkRaw*```'s functions may help Agda to infer indices (?).
