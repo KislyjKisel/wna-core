@@ -15,8 +15,6 @@ record DecStrictOrder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
 
     _>?_ = flip _<?_
 
-open DecStrictOrder ⦃...⦄ public
-
 record DecOrder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infix 4 _≤_ _≤?_ _≥?_
     field
@@ -26,4 +24,11 @@ record DecOrder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
 
     _≥?_ = flip _≤?_
 
-open DecOrder ⦃...⦄ public
+module Instanced where
+    open DecStrictOrder ⦃...⦄ public
+        using (_<?_; _>?_)
+
+    open DecOrder ⦃...⦄ public
+        using (_≤?_; _≥?_)
+
+-- todo: Mk* modules for DecStrictOrder and DecOrder, _>?_ and _≥?_ as fields

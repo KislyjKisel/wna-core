@@ -8,5 +8,6 @@ record Cast[_⇒_] {aℓ bℓ} (From : Type aℓ) (To : Type bℓ) : Type (aℓ 
     field
         cast : From → To
 
-open Cast[_⇒_] ⦃...⦄ public
-    using (cast)
+module Instanced where
+    open Cast[_⇒_] ⦃...⦄ public
+        using (cast)

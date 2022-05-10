@@ -18,8 +18,6 @@ record RawEquality {aℓ} {bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ �
         _≡ᵇ_ : A → B → Bool
         _≢ᵇ_ : A → B → Bool
 
-open RawEquality ⦃...⦄ public
-
 module MkRawEquality {aℓ} {bℓ} (A : Type aℓ) (B : Type bℓ) where
     private
         module FT = RawEqualityFT A B
@@ -29,3 +27,7 @@ module MkRawEquality {aℓ} {bℓ} (A : Type aℓ) (B : Type bℓ) where
 
     from:_≡ᵇ_ : FT._≡ᵇ_ → RawEquality A B
     from:_≡ᵇ_ _≡ᵇ_ = record { _≡ᵇ_ = _≡ᵇ_; _≢ᵇ_ = _≡ᵇ_⇒_≢ᵇ_ _≡ᵇ_ }
+
+module Instanced where
+    open RawEquality ⦃...⦄ public
+        using (_≡ᵇ_; _≢ᵇ_)

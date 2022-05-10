@@ -15,8 +15,6 @@ record RawStrictOrder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ �
     _≱ᵇ_ = _<ᵇ_
     _≰ᵇ_ = _>ᵇ_
 
-open RawStrictOrder ⦃...⦄ public
-
 record RawOrder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ ℓ⊔ bℓ) where
     infix 4 _≤ᵇ_ _≥ᵇ_ _≯ᵇ_ _≮ᵇ_
     field
@@ -26,4 +24,11 @@ record RawOrder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Type (aℓ ℓ⊔ 
     _≯ᵇ_ = _≤ᵇ_
     _≮ᵇ_ = _≥ᵇ_
 
-open RawOrder ⦃...⦄ public
+module Instanced where
+    open RawStrictOrder ⦃...⦄ public
+        using (_<ᵇ_; _>ᵇ_; _≱ᵇ_; _≰ᵇ_)
+
+    open RawOrder ⦃...⦄ public
+        using (_≤ᵇ_; _≥ᵇ_; _≯ᵇ_; _≮ᵇ_)
+
+-- todo: Mk* modules for Raw- orders, make _≥ᵇ_ and similar fields

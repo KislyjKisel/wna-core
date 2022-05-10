@@ -10,3 +10,6 @@ record MonadFree {ℓ} (F M : Type ℓ → Type ℓ) : Type (ℓ↑ ℓ) where
         overlap ⦃ rawMonad ⦄ : RawMonad M
 
         wrap : ∀{A} → F (M A) → M A
+
+module Instanced where
+    open MonadFree ⦃...⦄ public

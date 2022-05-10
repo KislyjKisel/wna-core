@@ -12,5 +12,6 @@ record MonadAsk {ℓ} (E : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
         
         ask : M E
 
-open MonadAsk ⦃...⦄ public
-    using (ask)
+module Instanced where
+    open MonadAsk ⦃...⦄ public
+        using (ask)

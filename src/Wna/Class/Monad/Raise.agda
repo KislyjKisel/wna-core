@@ -12,5 +12,6 @@ record MonadRaise {ℓ} (E : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
         
         raise : E → ∀{A} → M A 
 
-open MonadRaise ⦃...⦄ public
-    using (raise)
+module Instanced where
+    open MonadRaise ⦃...⦄ public
+        using (raise)

@@ -11,9 +11,10 @@ record RawMonoid {ℓ} (A : Type ℓ) : Type ℓ where
         mappend : A → A → A
         mempty  : A
 
-open RawMonoid ⦃...⦄ public
-    using (mappend; mempty)
-
 from-std : ∀{aℓ rℓ} → Ab.RawMonoid aℓ rℓ → Σ (Type aℓ) RawMonoid
 from-std sm = Carrier , record { mappend = _∙_ ; mempty = ε }
     where open Ab.RawMonoid sm
+
+module Instanced where
+    open RawMonoid ⦃...⦄ public
+        using (mappend; mempty)

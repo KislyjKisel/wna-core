@@ -137,3 +137,10 @@ module MkRawIApplicative {iℓ aℓ} {I : Type iℓ} {F : IFun I aℓ} where
 
 module MkRawApplicative {aℓ} {F : Fun aℓ} where
     open MkRawIApplicative {aℓ = aℓ} {F = Fun⇒IFun F} public
+
+module Instanced where
+    open RawIApplicative ⦃...⦄ public
+        using
+        ( pure ; liftA2
+        ; _<*>_ ; _<*_ ; _*>_
+        )

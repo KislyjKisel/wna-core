@@ -13,11 +13,14 @@ record DecEquality {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
         { _≈_ } : A → B → Type rℓ
         _≈?_    : Decidable _≈_
 
-open DecEquality ⦃...⦄ public
-
 record DecPropositionalEquality {aℓ} (A : Type aℓ) : Type aℓ where
     infix 4 _≡?_
     field
         _≡?_ : Decidable {A = A} _≡_
 
-open DecPropositionalEquality ⦃...⦄ public
+module Instanced where
+    open DecEquality ⦃...⦄ public
+        using (_≈?_)
+
+    open DecPropositionalEquality ⦃...⦄ public
+        using (_≡?_)

@@ -12,5 +12,6 @@ record MonadHandle {ℓ} (E : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
         
         handle : ∀{A} → M A → (E → M A) → M A 
 
-open MonadHandle ⦃...⦄ public
-    using (handle)
+module Instanced where
+    open MonadHandle ⦃...⦄ public
+        using (handle)

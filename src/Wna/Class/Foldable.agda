@@ -33,8 +33,6 @@ record Foldable {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) : Typeω where
         length   : FT.length
         _∈ᵇ_     : FT._∈ᵇ_
 
-open Foldable ⦃...⦄ public
-
 module MkFoldable {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) where
     module FT = FoldableFT T
 
@@ -104,4 +102,7 @@ module MkFoldable {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) where
         ; length   = foldl⇒length foldl
         ; _∈ᵇ_     = foldl⇒_∈ᵇ_ foldl
         }
- 
+
+module Instanced where
+    open Foldable ⦃...⦄ public
+        using (foldl; foldr; fold; foldMap)

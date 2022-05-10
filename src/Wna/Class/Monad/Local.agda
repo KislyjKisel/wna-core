@@ -16,5 +16,6 @@ record MonadLocal {ℓ} (E : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
         local : (E → E) → {A : Type ℓ} → M A → M A
 
-open MonadLocal ⦃...⦄ public
-    using (local)
+module Instanced where
+    open MonadLocal ⦃...⦄ public
+        using (local)

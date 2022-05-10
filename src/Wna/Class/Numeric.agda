@@ -11,16 +11,12 @@ record Negate {aℓ} (A : Type aℓ) : Typeω where
         R   : Type r
         -_  : A → R
 
-open Negate ⦃...⦄ public
-
 record Add {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 6 _+_
     field
         {r} : _
         R   : Type r
         _+_ : A → B → R
-
-open Add ⦃...⦄ public
 
 record Subtract {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 6 _-_
@@ -29,16 +25,12 @@ record Subtract {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
         R   : Type r
         _-_ : A → B → R
 
-open Subtract ⦃...⦄ public
-
 record Multiply {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 7 _*_
     field
         {r} : _
         R   : Type r
         _*_ : A → B → R
-
-open Multiply ⦃...⦄ public
 
 record Divide {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 7 _/_
@@ -47,16 +39,12 @@ record Divide {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
         R   : Type r
         _/_ : A → B → R
 
-open Divide ⦃...⦄ public
-
 record Modulo {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 7 _%_
     field
         {r} : _
         R   : Type r
         _%_ : A → B → R
-
-open Modulo ⦃...⦄ public
 
 record Quotient {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 7 _quot_
@@ -65,16 +53,12 @@ record Quotient {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
         R   : Type r
         _quot_ : A → B → R
 
-open Quotient ⦃...⦄ public
-
 record Remainder {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 7 _rem_
     field
         {r} : _
         R   : Type r
         _rem_ : A → B → R
-
-open Remainder ⦃...⦄ public
 
 record Square {aℓ} (A : Type aℓ) : Typeω where
     infix 8 _²
@@ -83,16 +67,12 @@ record Square {aℓ} (A : Type aℓ) : Typeω where
         R   : Type r
         _²  : A → R
 
-open Square ⦃...⦄ public
-
 record Reciprocal {aℓ} (A : Type aℓ) : Typeω where
     infix 7 1/_
     field
         {r} : _
         R   : Type r
         1/_ : A → R
-
-open Reciprocal ⦃...⦄ public
 
 record Power {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 8 _^_
@@ -101,23 +81,17 @@ record Power {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
         R   : Type r
         _^_ : A → B → R
 
-open Power ⦃...⦄ public
-
 record Exponential {aℓ} (A : Type aℓ) : Typeω where
     field
         {r} : _
         R   : Type r
         exp : A → R
 
-open Exponential ⦃...⦄ public
-
 record Absolute {aℓ} (A : Type aℓ) : Typeω where
     field
         {r} : _
         R   : Type r
         abs : A → R
-
-open Absolute ⦃...⦄ public
 
 record Join {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 6 _∨_
@@ -126,8 +100,6 @@ record Join {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
         R   : Type r
         _∨_ : A → B → R
 
-open Join ⦃...⦄ public
-
 record Meet {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
     infixl 7 _∧_
     field
@@ -135,4 +107,48 @@ record Meet {aℓ bℓ} (A : Type aℓ) (B : Type bℓ) : Typeω where
         R   : Type r
         _∧_ : A → B → R
 
-open Meet ⦃...⦄ public
+module Instanced where
+    open Negate ⦃...⦄ public
+        using (-_)
+
+    open Add ⦃...⦄ public
+        using (_+_)
+
+    open Subtract ⦃...⦄ public
+        using (_-_)
+
+    open Multiply ⦃...⦄ public
+        using (_*_)
+
+    open Divide ⦃...⦄ public
+        using (_/_)
+
+    open Modulo ⦃...⦄ public
+        using (_%_)
+
+    open Quotient ⦃...⦄ public
+        using (_quot_)
+
+    open Remainder ⦃...⦄ public
+        using (_rem_)
+
+    open Square ⦃...⦄ public
+        using (_²)
+
+    open Power ⦃...⦄ public
+        using (_^_)
+
+    open Exponential ⦃...⦄ public
+        using (exp)
+
+    open Absolute ⦃...⦄ public
+        using (abs)
+
+    open Join ⦃...⦄ public
+        using (_∨_)
+
+    open Meet ⦃...⦄ public
+        using (_∧_)
+
+    open Reciprocal ⦃...⦄ public
+        using (1/_)

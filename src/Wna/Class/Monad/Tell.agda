@@ -13,5 +13,6 @@ record MonadTell {ℓ} (L : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
 
         tell : L → M ⊤
 
-open MonadTell ⦃...⦄ public
-    using (tell)
+module Instanced where
+    open MonadTell ⦃...⦄ public
+        using (tell)

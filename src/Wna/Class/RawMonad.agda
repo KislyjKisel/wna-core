@@ -96,3 +96,10 @@ module MkRawIMonad {iℓ aℓ} {I : Type iℓ} {F : IFun I aℓ} where
 module MkRawMonad {aℓ} {F : Fun aℓ} where
     open MkRawIMonad {aℓ = aℓ} {F = Fun⇒IFun F} public
         renaming (pure,>>=⇒rawIApplicative to pure,>>=⇒rawApplicative)
+
+module Instanced where
+    open RawIMonad ⦃...⦄ public
+        using
+        ( join ; return
+        ; _>>=_ ; _=<<_ ; _>>_ ; _>=>_ ; _<=<_
+        )

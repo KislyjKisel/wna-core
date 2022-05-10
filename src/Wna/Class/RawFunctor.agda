@@ -45,3 +45,7 @@ module MkRawFunctor {aℓ bℓ} {F : Type aℓ → Type bℓ} where
         { _<$>_ = _<$>_
         ; _<$_  = <$>⇒<$ _<$>_
         }
+
+module Instanced where
+    open RawFunctor ⦃...⦄ public
+        using (map; _<$>_; _<$_)

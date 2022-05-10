@@ -26,9 +26,6 @@ record MonadState {ℓ} (S : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
         x ← get
         pure (f x)
 
-open MonadState ⦃...⦄ public
-    using (get; put; modify; gets)
-
 record IMonadState {ℓ} (M : IFun (Type ℓ) ℓ) : Type (ℓ↑ ℓ) where
     field
         overlap ⦃ rawIMonad ⦄ : RawIMonad M
@@ -47,13 +44,9 @@ record IMonadState {ℓ} (M : IFun (Type ℓ) ℓ) : Type (ℓ↑ ℓ) where
         x ← iget
         pure (f x)
 
-open IMonadState ⦃...⦄ public
-    using (iget; iput; imodify; igets)
+module Instanced where
+    open MonadState ⦃...⦄ public
+        using (get; put; modify; gets)
 
--- IState⇒State : ∀{ℓ} {M : IFun (Type ℓ) ℓ} ⦃ M-monad : RawIMonad M ⦄ →
---                IState M ⦃ M-monad ⦄ → ∀{i : Type ℓ} → State (M i i) ⦃ RawIMonad.rawMonad M-monad ⦄
--- IState⇒State ist {i = i} = record
---     { S   = i
---     ; get = IState.iget ist
---     ; put = IState.iput ist
---     }
+    open IMonadState ⦃...⦄ public
+        using (iget; iput; imodify; igets)

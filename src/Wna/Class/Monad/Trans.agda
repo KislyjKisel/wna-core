@@ -11,5 +11,6 @@ record MonadTrans {ℓ} (T : MonT ℓ ℓ) : Type (ℓ↑ ℓ) where
     field
         lift : ∀{M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ {A : Type ℓ} → M A → T M A
 
-open MonadTrans ⦃...⦄ public
-    using (lift)
+module Instanced where
+    open MonadTrans ⦃...⦄ public
+        using (lift)
