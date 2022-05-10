@@ -9,6 +9,8 @@ foldable : ∀{a} → Foldable (List {a})
 foldable = record
     { foldl    = foldl
     ; foldr    = foldr
+    ; fold     = Mk.foldr⇒fold foldr
+    ; foldMap  = Mk.foldr⇒foldMap foldr
     ; toList   = λ x → x
     ; is-empty = null
     ; length   = length
