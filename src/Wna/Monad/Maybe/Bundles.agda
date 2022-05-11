@@ -4,7 +4,7 @@ module Wna.Monad.Maybe.Bundles where
 
 open import Data.Maybe.Base                  renaming (_>>=_ to mb-bind)
 open import Function.Base                    using (id; _∘_)
-open import Wna.Class.Monad.Trans            using (Trans)
+open import Wna.Class.Monad.Trans            using (MonadTrans)
 open import Wna.Class.RawApplicative         using (module MkRawApplicative)
 open import Wna.Class.RawFunctor             using (Fun; module MkRawFunctor)
 open import Wna.Class.RawMonad               using (RawMonad; module MkRawMonad)
@@ -41,7 +41,7 @@ module _ {ℓ} where
     rawFunctor : RawMonadT-RawFunctor (MaybeT {ℓ})
     rawFunctor = RawMonad.rawFunctor rawMonadT
 
-    trans : Trans (MaybeT {ℓ = ℓ})
-    trans = record
+    monadTrans : MonadTrans (MaybeT {ℓ = ℓ})
+    monadTrans = record
         { lift = lift
         } 

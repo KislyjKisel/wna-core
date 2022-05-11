@@ -2,13 +2,13 @@
 
 module Wna.Monad.Except.Bundles where
 
-open import Wna.Class.Monad.Handle              using (Handle)
-open import Wna.Class.Monad.Raise               using (Raise)
+open import Wna.Class.Monad.Handle              using (MonadHandle)
+open import Wna.Class.Monad.Raise               using (MonadRaise)
 open import Wna.Class.Monad.Trans
 open import Wna.Class.RawApplicative            using (module ApplicativeFT)
 open import Wna.Class.RawFunctor                using (Fun)
 open import Wna.Class.RawMonad                  using (RawMonad; module MonadFT; module MkRawMonad)
-open import Wna.Monad.Except.Base       as Ex   hiding (raise; handle)
+open import Wna.Monad.Except.Base
 open import Wna.Monad.Identity.Bundles  as Id   using ()
 open import Wna.Monad.Trans
 open import Wna.Primitive
@@ -31,21 +31,19 @@ module _ {eℓ} {E : Type eℓ} where
     rawFunctor : RawMonadT-RawFunctor (ExceptT E)
     rawFunctor = RawMonad.rawFunctor rawMonadT
 
-    raise : ∀{M} ⦃ M-monad : RawMonad M ⦄ → Raise (ExceptT E M)
-    raise = record
-        { E        = _
-        ; raise    = Ex.raise
+    monadRaise : ∀{M} ⦃ M-monad : RawMonad M ⦄ → MonadRaise E (ExceptT E M)
+    monadRaise = record
+        { raise    = raise
         ; rawMonad = rawMonadT
         }
 
-    handle : ∀{M} ⦃ M-monad : RawMonad M ⦄ → Handle (ExceptT E M)
-    handle = record
-        { E        = _
-        ; handle   = Ex.handle
+    monadHandle : ∀{M} ⦃ M-monad : RawMonad M ⦄ → MonadHandle E (ExceptT E M)
+    monadHandle = record
+        { handle   = handle
         ; rawMonad = rawMonadT
         }
 
-    trans : Trans (ExceptT E)
-    trans = record
-        { lift = Ex.lift
+    monadTrans : MonadTrans (ExceptT E)
+    monadTrans = record
+        { lift = lift
         }
