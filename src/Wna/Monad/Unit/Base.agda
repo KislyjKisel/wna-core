@@ -13,6 +13,9 @@ record Unit {ℓ} (A : Type ℓ) : Type ℓ where
     field
         runUnit : ⊤ {ℓ}
 
+open Unit public
+    using (runUnit)
+
 pure : ∀{ℓ} {A : Type ℓ} → A → Unit A
 pure _ = _
 
