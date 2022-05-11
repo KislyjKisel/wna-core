@@ -9,6 +9,11 @@ open import Wna.Primitive public
 open import Data.Nat.Base public
     using (ℕ)
 
+open import Data.Integer.Base public
+    using (ℤ)
+
+open import Data.Float.Base public
+    using (Float)
 
 open import Data.Maybe.Base public
     using
