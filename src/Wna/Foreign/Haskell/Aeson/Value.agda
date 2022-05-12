@@ -12,6 +12,7 @@ open import Wna.Data.Json.Base                               as Safe   using ()
 open import Wna.Foreign.Haskell.Aeson.FromJson                         using (FromJson)
 open import Wna.Foreign.Haskell.Aeson.Key                    as Key    using ()
 open import Wna.Foreign.Haskell.Aeson.KeyMap                 as KeyMap using (KeyMap)
+open import Wna.Foreign.Haskell.Aeson.ToJson                           using (ToJson)
 open import Wna.Foreign.Haskell.Containers.Map.Lazy.Base     as Map    using ()
 open import Wna.Foreign.Haskell.Containers.Vector.Boxed.Base as Vec    using (Vector)
 open import Wna.Foreign.Haskell.Scientific.Base              as Sci    using (Scientific)
@@ -31,7 +32,7 @@ data Value : Type where
 {-# TERMINATING #-}
 toForeign : Safe.Json → Value
 toForeign (Safe.object x) = object $ KeyMap.fromMap $ Map.toForeignKV ⦃ Key.ord ⦄ (Σ.map Key.fromString toForeign) x
-toForeign (Safe.array  x) = array (Vec.fromList $ List.map toForeign x) -- ! termination check failed, but why?
+toForeign (Safe.array  x) = array $ Vec.fromList $ List.map toForeign x -- ! termination check failed, but why?
 toForeign (Safe.string x) = string x
 toForeign (Safe.number x) = number $ Sci.toForeign x
 toForeign (Safe.bool   x) = bool x
@@ -48,6 +49,8 @@ fromForeign  null      = Safe.null
 
 postulate
     fromJson : FromJson Value
+    toJson   : ToJson   Value
 
 {-# COMPILE GHC Value = data Data.Aeson.Value (Object | Array | String | Number | Bool | Null) #-}
 {-# COMPILE GHC fromJson = AgdaFromJsonDict #-}
+{-# COMPILE GHC toJson   = AgdaToJsonDict   #-}
