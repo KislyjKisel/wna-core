@@ -20,7 +20,7 @@ postulate
     eitherDecode  : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Either (List Char) A
     eitherDecode' : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Either (List Char) A
 
-{-# FOREIGN GHC data AgdaFromJsonDict _ a = Data.Aeson.FromJson a => AgdaFromJsonDict #-}
+{-# FOREIGN GHC data AgdaFromJsonDict _ a = Data.Aeson.FromJSON a => AgdaFromJsonDict #-}
 {-# COMPILE GHC FromJson = type AgdaFromJsonDict #-}
 
 {-# COMPILE GHC decode        = \ ℓ A d → Data.Aeson.decode        #-}
