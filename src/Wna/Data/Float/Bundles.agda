@@ -8,7 +8,7 @@ open import Wna.Class.Cast          using (Cast[_⇒_])
 open import Wna.Class.Numeric       as Num using ()
 open import Wna.Class.RawEquality   as REq using ()
 open import Wna.Class.RawOrder      as ROr using ()
-open import Wna.Data.Float
+open import Wna.Data.Float.Base
 
 negate : Num.Negate Float
 negate = record { R = Float ; -_ = -_ }
