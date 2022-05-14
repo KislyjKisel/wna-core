@@ -86,3 +86,7 @@ module _ {ℓ} (T : Type ℓ → Type ℓ) where
             ; mapM      = sequenceA⇒mapM sequenceA
             ; sequence  = sequenceA⇒sequence sequenceA
             }
+
+module Instanced where
+    open Traversable ⦃...⦄ public
+        using (traverse; sequenceA; mapM; sequence)
