@@ -6,11 +6,22 @@ open import Wna.Primitive public
 
 ---- # Data
 
-open import Data.Nat.Base public
-    using (ℕ)
+import Data.Nat.Base
 
-open import Data.Integer.Base public
-    using (ℤ)
+module ℕ where
+    open Data.Nat.Base public
+        hiding (ℕ)
+
+ℕ = Data.Nat.Base.ℕ
+
+
+import Data.Integer.Base
+
+module ℤ where
+    open Data.Integer.Base public
+        hiding (ℤ)
+
+ℤ = Data.Integer.Base.ℤ
 
 open import Data.Float.Base public
     using (Float)

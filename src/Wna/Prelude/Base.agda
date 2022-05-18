@@ -75,5 +75,5 @@ open import Wna.Monad.State public
     using
     ( IState ; State ; StateT ; StateIT ; StateTI ; mkState
     ; runState ; evalState ; execState
-    ; runState′ ; evalState′ ; execState′
+    ; mkState′ ; runState′ ; evalState′ ; execState′
     )
