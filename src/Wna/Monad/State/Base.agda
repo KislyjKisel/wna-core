@@ -8,7 +8,7 @@ open import Function.Base               using (_∘′_)
 open import Wna.Class.RawApplicative    using (IFun; Fun⇒IFun)
 open import Wna.Class.RawFunctor        using (Fun)
 open import Wna.Class.RawMonad          using (RawIMonad; RawMonad; module IMonadFT)
-open import Wna.Monad.Identity          using (Identity; runIdentity)
+open import Wna.Monad.Identity          using (Identity; runIdentity; mkIdentity)
 open import Wna.Monad.Trans             using (MonT; MonIT; MonTI)
 open import Wna.Primitive
 
@@ -42,6 +42,9 @@ StateIT S M i j = StateT S (M i j)
 
 State : ∀{ℓ} → Type ℓ → Fun ℓ
 State S = StateT S Identity
+
+mkState′ : ∀{ℓ} {S A : Type ℓ} → (S → A × S) → State S A
+mkState′ f = mkState (mkIdentity ∘′ f)
 
 runState′ : ∀{ℓ} {S A : Type ℓ} → State S A → S → A × S
 runState′ (mkState f) x = runIdentity (f x)
