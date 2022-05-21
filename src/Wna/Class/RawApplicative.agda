@@ -4,9 +4,7 @@ module Wna.Class.RawApplicative where
 
 open import Data.Product                    using (_×_; _,_)
 open import Data.Unit                       using (⊤; tt)
-open import Data.Unit.Polymorphic as ⊤ℓ*    using ()
 open import Function.Base                   using (const; constᵣ; flip; id)
-open import Wna.Class.Foldable              using (Foldable)
 open import Wna.Class.RawFunctor            using (Fun; RawFunctor; module FunctorFT; module MkRawFunctor)
 open import Wna.Primitive
 
@@ -92,15 +90,6 @@ module RawApplicative {aℓ} {F : Type aℓ → Type aℓ} (raw : RawApplicative
     open RawIApplicative raw public
         hiding (rawApplicative)
 
-    traverse¡ : ∀{T : Type aℓ → Type aℓ} ⦃ _ : Foldable T ⦄ {A B : Type aℓ} → (A → F B) → T A → F ⊤ℓ*.⊤
-    traverse¡ ⦃ Fld ⦄ f = foldr (λ x k → f x *> k) (pure ⊤ℓ*.tt)
-        where open Foldable Fld
-
-    for¡ = λ{T} ⦃ Fld ⦄ {A} {B} → flip (traverse¡ {T} ⦃ Fld ⦄ {A} {B})
-
-    sequence¡ : ∀{T : Type aℓ → Type aℓ} ⦃ _ : Foldable T ⦄ {A : Type aℓ} → T (F A) -> F ⊤ℓ*.⊤
-    sequence¡ ⦃ Fld ⦄ = foldr (_*>_) (pure ⊤ℓ*.tt)
-        where open Foldable Fld
 
 module MkRawIApplicative {iℓ aℓ} {I : Type iℓ} {F : IFun I aℓ} where
     private module FT = IApplicativeFT F

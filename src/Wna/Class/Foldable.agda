@@ -5,8 +5,11 @@ module Wna.Class.Foldable where
 open import Agda.Builtin.List             using (List; []; _∷_)
 open import Agda.Builtin.Nat              using ()                        renaming (Nat to ℕ)
 open import Data.Bool.Base                using (Bool; true; false; _∨_)
+open import Data.Unit.Polymorphic as ⊤ℓ*  using ()
 open import Function.Base                 using (id; flip; _∘′_; _$′_)
+open import Wna.Class.RawApplicative      using (RawApplicative)
 open import Wna.Class.RawEquality         using (RawEquality)
+open import Wna.Class.RawMonad            using (RawMonad)
 open import Wna.Class.RawMonoid           using (RawMonoid; dual)
 open import Wna.Data.Endo         as Endo using (Endo; mkEndo; appEndo)
 open import Wna.Primitive
@@ -117,3 +120,28 @@ module Instanced where
     open Foldable ⦃...⦄ public
         using (foldl; foldr; fold; foldMap)
   
+    module _ {aℓ} {F : Type aℓ → Type aℓ} ⦃ _ : RawApplicative F ⦄
+             {T : Type aℓ → Type aℓ} ⦃ _ : Foldable T ⦄
+             where
+        private
+            module App = Wna.Class.RawApplicative.Instanced
+
+        traverse¡ : {A B : Type aℓ} → (A → F B) → T A → F ⊤ℓ*.⊤
+        traverse¡ f = foldr (λ x k → f x App.*> k) (App.pure ⊤ℓ*.tt)
+
+        for¡ = λ{A} {B} → flip (traverse¡ {A} {B})
+
+        sequence¡ : ∀{A : Type aℓ} → T (F A) -> F ⊤ℓ*.⊤
+        sequence¡ = foldr (App._*>_) (App.pure ⊤ℓ*.tt)
+
+    module _ {aℓ} {M : Type aℓ → Type aℓ} ⦃ _ : RawMonad M ⦄
+             {T : Type aℓ → Type aℓ} ⦃ _ : Foldable T ⦄
+             where
+        private
+            module Mon = Wna.Class.RawMonad.Instanced
+
+        foldrM : ∀{A B} → (A → B → M B) → B → T A → M B
+        foldrM f b₀ t = foldl (λ k a b → f a b Mon.>>= k) Mon.return t b₀
+
+        foldlM : ∀{A B} → (A → B → M A) → A → T B → M A
+        foldlM f a₀ t = foldr (λ b k a → f a b Mon.>>= k) Mon.return t a₀
