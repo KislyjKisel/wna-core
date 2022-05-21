@@ -5,8 +5,8 @@ module Wna.Class.RawFunctor where
 open import Function.Base using (const; flip)
 open import Wna.Primitive
 
-Fun : ∀ a → Type (ℓ↑ a)
-Fun a = Type a → Type a
+Fun : ∀ ℓ → Type (ℓ↑ ℓ)
+Fun ℓ = Type ℓ → Type ℓ
 
 module FunctorFT {aℓ bℓ} (F : Type aℓ → Type bℓ) where
 
