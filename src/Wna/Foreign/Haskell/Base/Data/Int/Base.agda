@@ -11,6 +11,8 @@ open import Data.Nat.Base using (ℕ)
 open import Foreign.Haskell.Pair using (Pair)
 open import Wna.Foreign.Haskell.Base.Data.Ordering.Base using (Ordering)
 open import Wna.Primitive
+open import Data.List.Base using (List)
+open import Data.Char.Base using (Char)
 
 {-# FOREIGN GHC import Data.Int #-}
 {-# FOREIGN GHC import Data.Bits #-}
@@ -23,6 +25,9 @@ postulate
 
 
 postulate
+
+  -- Num
+  show : Int -> List Char
 
   -- Num
   _+_ : Int -> Int -> Int
@@ -80,6 +85,9 @@ postulate
 
   fromℕ : ℕ -> Int
 
+
+-- Num
+{-# COMPILE GHC show = Prelude.show #-}
 
 -- Num
 {-# COMPILE GHC _+_ = (Prelude.+) #-}

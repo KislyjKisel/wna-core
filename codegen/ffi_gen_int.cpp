@@ -47,6 +47,9 @@ constexpr const char* ftT_i_T   = "{0} -> Int -> {0}";
 
 constexpr F fs_base[] = {
     { "", "", "Num" },
+    { "show", "Prelude.show", "{0} -> List Char" },
+    
+    { "", "", "Num" },
     { "_+_", "(Prelude.+)", ftT_T_T },
     { "_-_", "(Prelude.-)", ftT_T_T },
     { "_*_", "(Prelude.*)", ftT_T_T },
@@ -217,6 +220,8 @@ int main() {
         m.import("Foreign.Haskell.Pair").open().use("Pair");
         m.import("Wna.Foreign.Haskell.Base.Data.Ordering.Base").open().use("Ordering");
         m.import("Wna.Primitive").open();
+        m.import("Data.List.Base").open().use("List");
+        m.import("Data.Char.Base").open().use("Char");
         t.extra_imports(m);
         m.blank(1);
         m.ffi_hs_import(t.hs_module);

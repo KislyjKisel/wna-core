@@ -11,6 +11,8 @@ open import Data.Nat.Base using (ℕ)
 open import Foreign.Haskell.Pair using (Pair)
 open import Wna.Foreign.Haskell.Base.Data.Ordering.Base using (Ordering)
 open import Wna.Primitive
+open import Data.List.Base using (List)
+open import Data.Char.Base using (Char)
 open import Wna.Foreign.Haskell.Base.Data.Int.Base using (Int; ℕ⇒+Int; ℕ⇒-Int)
 
 {-# FOREIGN GHC import Data.Word #-}
@@ -24,6 +26,9 @@ postulate
 
 
 postulate
+
+  -- Num
+  show : Word64 -> List Char
 
   -- Num
   _+_ : Word64 -> Word64 -> Word64
@@ -81,6 +86,9 @@ postulate
 
   fromℕ : ℕ -> Word64
 
+
+-- Num
+{-# COMPILE GHC show = Prelude.show #-}
 
 -- Num
 {-# COMPILE GHC _+_ = (Prelude.+) #-}
