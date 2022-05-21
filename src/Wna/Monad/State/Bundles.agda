@@ -13,22 +13,22 @@ open import Wna.Monad.Trans
 open import Wna.Primitive
 
 rawMonadTI : ∀{ℓ} → RawMonadTI (StateTI {ℓ}) 
-rawMonadTI = MkRawIMonad.from:pure,>>= pure _>>=_
+rawMonadTI = MkRawIMonad.from:pure,>>= pureTI _>>=TI_
 
-rawIMonad : ∀{ℓ} → RawIMonad (IState {ℓ = ℓ})
-rawIMonad = rawMonadTI ⦃ Id.rawMonad ⦄
+rawMonadI : ∀{ℓ} → RawIMonad (StateI {ℓ = ℓ})
+rawMonadI = rawMonadTI ⦃ Id.rawMonad ⦄
 
 rawMonadT : ∀{ℓ} {S : Type ℓ} → RawMonadT (StateT S)
-rawMonadT = MkRawMonad.from:pure,>>= pure _>>=_
+rawMonadT = MkRawMonad.from:pure,>>= pureTI _>>=TI_
 
 module _ {ℓ} where
-    open RawIMonad (rawIMonad {ℓ = ℓ}) public
+    open RawIMonad (rawMonadI {ℓ = ℓ}) public
         using (rawMonad)
 
 module _ {ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ where
 
-    rawIApplicative : RawIApplicative (StateTI M)
-    rawIApplicative = RawIMonad.rawIApplicative rawMonadTI
+    rawApplicativeI : RawIApplicative (StateTI M)
+    rawApplicativeI = RawIMonad.rawIApplicative rawMonadTI
 
     rawApplicative : ∀{S : Type ℓ} → RawApplicative (StateT S M)
     rawApplicative = RawMonad.rawApplicative rawMonadT
@@ -42,16 +42,16 @@ monadTrans = record
     }
 
 
-istate : ∀{ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ → IMonadState (StateTI M)
-istate = record
-    { iget      = iget
-    ; iput      = iput
+statei : ∀{ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ → IMonadState (StateTI M)
+statei = record
+    { iget      = getTI
+    ; iput      = putTI
     ; rawIMonad = rawMonadTI
     }
 
 state : ∀{ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ {S : Type ℓ} → MonadState S (StateT S M)
 state = record
-    { get      = iget
-    ; put      = iput
+    { get      = getTI
+    ; put      = putTI
     ; rawMonad = rawMonadT
     }
