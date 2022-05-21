@@ -5,9 +5,14 @@ module Wna.Data.Vec.Bundles where
 open import Agda.Builtin.Bool   using (true; false)
 open import Agda.Builtin.Nat    using (zero; suc; _==_)
 open import Wna.Class.Foldable  using (Foldable; module MkFoldable)
+open import Wna.Class.Traversable using (Traversable; module MkTraversable)
+open import Wna.Class.RawFunctor using (RawFunctor; module MkRawFunctor)
 open import Wna.Data.Vec.Base
 
-foldable : ∀{aℓ n} → Foldable (λ A → Vec {aℓ} A n)
+rawFunctor : ∀{aℓ n} → RawFunctor (λ A → Vec {a = aℓ} A n)
+rawFunctor = MkRawFunctor.from:<$> map
+
+foldable : ∀{aℓ n} → Foldable (λ A → Vec {a = aℓ} A n)
 foldable {aℓ} {n} = record
     { foldl    = foldl′
     ; foldr    = foldr′
@@ -19,3 +24,6 @@ foldable {aℓ} {n} = record
     ; _∈ᵇ_     = Mk.foldr⇒_∈ᵇ_ foldr′
     }
     where module Mk = MkFoldable (λ A → Vec {aℓ} A n)
+
+traversable : ∀{aℓ n} → Traversable (λ A → Vec {a = aℓ} A n)
+traversable = MkTraversable.from:traverse′ _ ⦃ rawFunctor ⦄ traverse
