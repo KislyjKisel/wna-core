@@ -2,6 +2,23 @@
 
 module Wna.Prelude.Instanced where
 
+import Wna.Class.RawFunctor
+open Wna.Class.RawFunctor.Instanced public
+    using (map)
+
+import Wna.Class.RawApplicative
+open Wna.Class.RawApplicative.Instanced public
+    using (pure; liftA2; _<*>_; _<*_; _*>_)
+
+import Wna.Class.RawMonad
+open Wna.Class.RawMonad.Instanced public
+    using
+    ( join ; return
+    ; _>>=_ ; _=<<_ ; _>>_ ; _>=>_ ; _<=<_
+    )
+
+--
+
 import Wna.Class.Monad.Trans
 open Wna.Class.Monad.Trans.Instanced public
     using (lift)
@@ -46,8 +63,8 @@ open Wna.Class.Foldable.Instanced public
 import Wna.Class.Numeric
 open Wna.Class.Numeric.Instanced public
     using
-    ( -_ ; _+_ ; _-_ ; _*_ ; _/_
-    ; _%_ ; _quot_; _rem_ ; _^_
+    ( -_ ; -_⟨_⟩ ; _+_ ; _-_ ; _*_ ; _/_
+    ; _%_ ; _%_⟨_⟩ ; _quot_; _rem_ ; _^_
     ; _² ; 1/_
     ; exp ; abs
     ; _∨_ ; _∧_

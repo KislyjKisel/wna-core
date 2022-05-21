@@ -2,6 +2,14 @@
 
 module Wna.Prelude.Base where
 
+-- Extended/new data
+
+open import Wna.Data.List public
+    using  (List)
+    hiding (module List)
+
+module List = Wna.Data.List
+
 -- Classes
 
 open import Wna.Class.RawFunctor public
@@ -60,20 +68,39 @@ open import Wna.Class.Monad.Tell public
 -- Monads
 
 open import Wna.Monad.Identity public
-    using (Identity; mkIdentity; runIdentity)
+    using  (Identity; mkIdentity; runIdentity)
+    hiding (module Identity)
+
+module Identity where
+    open import Wna.Monad.Identity public
 
 open import Wna.Monad.Maybe public
-    using (Maybe; MaybeT)
+    using  (Maybe; MaybeT)
+    hiding (module Maybe)
 
-open import Wna.Monad.Except public
+module Maybe where
+    open import Wna.Monad.Maybe public
+
+open import Wna.Monad.Except.Base public
     using (Except; ExceptT; mkExcept; runExcept)
+
+module Except where
+    open import Wna.Monad.Except public
 
 open import Wna.Monad.Reader public
     using (Reader; ReaderT; ReaderIT; mkReader; runReader)
 
-open import Wna.Monad.State public
-    using
-    ( IState ; State ; StateT ; StateIT ; StateTI ; mkState
-    ; runState ; evalState ; execState
-    ; mkState′ ; runState′ ; evalState′ ; execState′
+module Reader where
+    open import Wna.Monad.Reader public
+
+open import Wna.Monad.State.Base public
+    using (State; StateT; StateI; StateTI; StateIT)
+    renaming
+    ( make to mkState ; run to runState
+    ; eval to evalState ; exec to execState
+    ; makeTI to mkStateTI ; runTI to runStateTI
+    ; evalTI to evalStateTI ; execTI to execStateTI
     )
+
+module State where
+    open import Wna.Monad.State public

@@ -10,18 +10,20 @@ import Wna.Data.Vec.Bundles   as Vec
 -- ([A-Za-z\-ℕℤ]+) :.*\n.*\n  ->  ?-$1 = ?.$1
 
 instance
-    ℕ-add            = ℕ.add
-    ℕ-subtract       = ℕ.subtract
-    ℕ-multiply       = ℕ.multiply
-    ℕ-square         = ℕ.square
-    ℕ-power          = ℕ.power
-    ℕ-join           = ℕ.join
-    ℕ-meet           = ℕ.meet
-    ℕ-rawEquality    = ℕ.rawEquality
-    ℕ-rawStrictOrder = ℕ.rawStrictOrder
-    ℕ-rawOrder       = ℕ.rawOrder
-    ℕ-decStrictOrder = ℕ.decStrictOrder
-    ℕ-decOrder       = ℕ.decOrder
+    ℕ-add             = ℕ.add
+    ℕ-subtract        = ℕ.subtract
+    ℕ-multiply        = ℕ.multiply
+    ℕ-modulo          = ℕ.modulo
+    ℕ-square          = ℕ.square
+    ℕ-power           = ℕ.power
+    ℕ-join            = ℕ.join
+    ℕ-meet            = ℕ.meet
+    ℕ-rawEquality     = ℕ.rawEquality
+    ℕ-rawStrictOrder  = ℕ.rawStrictOrder
+    ℕ-rawOrder        = ℕ.rawOrder
+    ℕ-decPropEquality = ℕ.decPropEquality
+    ℕ-decStrictOrder  = ℕ.decStrictOrder
+    ℕ-decOrder        = ℕ.decOrder
 
     Float-negate         = Float.negate
     Float-add            = Float.add

@@ -6,33 +6,39 @@ open import Wna.Primitive public
 
 ---- # Data
 
-import Data.Nat.Base
+open import Data.Nat public
+    using  (ℕ)
+    hiding (module ℕ)
 
 module ℕ where
-    open Data.Nat.Base public
+    open Data.Nat public
         hiding (ℕ)
 
-ℕ = Data.Nat.Base.ℕ
 
-
-import Data.Integer.Base
+open import Data.Integer public
+    using  (ℤ)
+    hiding (module ℤ)
 
 module ℤ where
-    open Data.Integer.Base public
+    open Data.Integer public
         hiding (ℤ)
 
-ℤ = Data.Integer.Base.ℤ
-
-open import Data.Float.Base public
+open import Data.Float public
     using (Float)
 
-open import Data.Maybe.Base public
+module Float where
+    open Data.Float public
+        hiding (Float)
+
+
+open import Data.Maybe public
     using
     ( Maybe ; just ; nothing
     ; maybe ; maybe′ ; fromMaybe ; is-just ; is-nothing
     )
+    hiding (module Maybe)
 
-module Mb = Data.Maybe.Base
+module Maybe = Data.Maybe
 
 
 open import Data.Product public
@@ -47,13 +53,13 @@ open import Data.Product public
 module Σ = Data.Product
 
 
-open import Data.Sum.Base public
+open import Data.Sum public
     using (_⊎_ ; inj₁ ; inj₂)
 
-module ⊎ = Data.Sum.Base
+module ⊎ = Data.Sum
 
 
-open import Data.Bool.Base public
+open import Data.Bool public
     using (Bool; true; false; if_then_else_)
 
 
@@ -73,38 +79,38 @@ open import Data.Empty public
     renaming (⊥ to ⊥′; ⊥-elim to ⊥′-elim)
 
 
-open import Data.String.Base public
+open import Data.String public
     using (String)
 
-module Str = Data.String.Base
+module String = Data.String
 
 
-open import Data.Fin.Base public
+open import Data.Fin public
     using (Fin)
     hiding (module Fin)
 
-module Fin = Data.Fin.Base
+module Fin = Data.Fin
 
 
-open import Data.Sign.Base public
+open import Data.Sign public
     using (Sign)
     hiding (module Sign)
 
-module Sign = Data.Sign.Base
+module Sign = Data.Sign
 
 
-open import Data.List.Base public
+open import Data.List public
     using (List)
     hiding (module List)
 
-module List = Data.List.Base
+module List = Data.List
 
 
-open import Data.Vec.Base public
+open import Data.Vec public
     using (Vec)
     hiding (module Vec)
 
-module Vec = Data.Vec.Base
+module Vec = Data.Vec
 
 ---- # Function
 
@@ -127,9 +133,11 @@ open import Function.Strict public
 -- # Reasoning
 
 open import Relation.Binary.PropositionalEquality public
-    using ( _≡_ ; _≢_ ; refl ; erefl ; _≗_ ; inspect )
+    using ( _≡_ ; _≢_ ; _≗_ ; inspect )
 
-module ≡ = Relation.Binary.PropositionalEquality
+module ≡ where
+    open Relation.Binary.PropositionalEquality public
+        hiding (_≡_; _≢_; _≗_)
 
 
 open import Relation.Nullary public
