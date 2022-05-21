@@ -2,16 +2,27 @@
 
 module Wna.Data.Float.Bundles where
 
-open import Agda.Builtin.Int        using () renaming (Int to ℤ)
-open import Agda.Builtin.Nat        using () renaming (Nat to ℕ)
-open import Wna.Class.Cast          using (Cast[_⇒_])
+open import Wna.Class.Cast                 using (Cast[_⇒_])
 open import Wna.Class.Numeric       as Num using ()
 open import Wna.Class.RawEquality   as REq using ()
 open import Wna.Class.RawOrder      as ROr using ()
 open import Wna.Data.Float.Base
+open import Wna.Data.Integer.Base          using (ℤ)
+open import Wna.Data.Nat.Base              using (ℕ)
+open import Wna.Data.Nat.Properties as ℕ   using ()
+
+-- Conversion
+
+cast-fromℕ : Cast[ ℕ ⇒ Float ]
+cast-fromℕ = record { cast = fromℕ }
+
+cast-fromℤ : Cast[ ℤ ⇒ Float ]
+cast-fromℤ = record { cast = fromℤ }
+
+-- Numeric
 
 negate : Num.Negate Float
-negate = record { R = Float ; -_ = -_ }
+negate = Num.mkNegate‵′ (-_)
 
 add : Num.Add Float Float
 add = record { R = Float ; _+_ = _+_ }
@@ -51,9 +62,3 @@ rawStrictOrder = record { _<ᵇ_ = _<ᵇ_ }
 
 rawOrder : ROr.RawOrder Float Float
 rawOrder = record { _≤ᵇ_ = _≤ᵇ_ }
-
-cast-fromℕ : Cast[ ℕ ⇒ Float ]
-cast-fromℕ = record { cast = fromℕ }
-
-cast-fromℤ : Cast[ ℤ ⇒ Float ]
-cast-fromℤ = record { cast = fromℤ }
