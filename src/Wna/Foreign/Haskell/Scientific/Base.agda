@@ -2,14 +2,15 @@
 
 module Wna.Foreign.Haskell.Scientific.Base where
 
-open import Data.Bool.Base                                 using (Bool)
-open import Data.Float.Base                                using (Float)
-open import Data.Integer.Base                              using (ℤ)
-open import Data.Sum.Base                                  using (_⊎_)
-open import Foreign.Haskell.Coerce                         using (coerce)
-open import Foreign.Haskell.Either as Either               using (Either)
-open import Wna.Foreign.Haskell.Base.Data.Int.Base as Int  using (Int)
-open import Wna.Data.Scientific.Base               as Safe using ()
+open import Data.Bool.Base                                  using (Bool)
+open import Data.Float.Base                                 using (Float)
+open import Data.Integer.Base                               using (ℤ)
+open import Data.Sum.Base                                   using (_⊎_)
+open import Foreign.Haskell.Coerce                          using (coerce)
+open import Foreign.Haskell.Either as Either                using (Either)
+open import Wna.Foreign.Haskell.Base.Data.Int.Base as Int   using (Int)
+open import Wna.Data.Scientific.Base               as Safe  using ()
+open import Wna.Data.Scientific.Unnormalized.Base  as Safeᵘ using ()
 open import Wna.Primitive
 
 {-# FOREIGN GHC import qualified Data.Scientific #-}
@@ -41,11 +42,17 @@ postulate
 floatOrInteger′ : Scientific → Float ⊎ ℤ
 floatOrInteger′ x = coerce (floatingOrInteger x)
 
-fromForeign : Scientific → Safe.Scientific
-fromForeign x = Safe.mkScientific (coefficient x) (Int.toℤ (base10Exponent x))
+fromForeignᵘ : Scientific → Safeᵘ.Scientificᵘ₁₀
+fromForeignᵘ x = Safeᵘ.mkScientificᵘ (coefficient x) (Int.toℤ (base10Exponent x))
 
-toForeign : Safe.Scientific → Scientific
-toForeign x = scientific (Safe.coefficient x) (Int.fromℤ (Safe.exponent₁₀ x))
+toForeignᵘ : Safeᵘ.Scientificᵘ₁₀ → Scientific
+toForeignᵘ x = scientific (Safeᵘ.significand x) (Int.fromℤ (Safeᵘ.exponent x))
+
+fromForeign : Scientific → Safe.Scientific₁₀
+fromForeign x = Safe.normalize (coefficient x) (Int.toℤ (base10Exponent x))
+
+toForeign : Safe.Scientific₁₀ → Scientific
+toForeign x = scientific (Safe.significand x) (Int.fromℤ (Safe.exponent x))
 
 {-# COMPILE GHC Scientific = type Data.Scientific.Scientific #-}
 
