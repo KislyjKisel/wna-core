@@ -21,8 +21,8 @@ open import Wna.Serialization.Json                as Json using ()
 json-decode : Json.Decode Float
 json-decode = record
     { decode = λ v → case (Json.IsNumber? v) of λ where
-        (yes p) → Ex.pure ⦃ Id.rawMonad ⦄ $ Sci.toFloat $ proj₁ p
-        (no ¬p) → Ex.raise ⦃ Id.rawMonad ⦄ $ liftℓ "Parsed value wasn't numeric"
+        (yes p) → Ex.pure $ Sci.toFloat $ proj₁ p
+        (no ¬p) → Ex.raise $ liftℓ "Parsed value wasn't numeric"
     }
 
 json-encode : Json.Encode Float
