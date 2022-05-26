@@ -7,11 +7,11 @@ open import Data.Container.Core                  using (Container; ⟦_⟧)
 open import Data.Product                  as Σ   using (proj₁; proj₂; _,_; _×_)
 open import Function.Base                        using (case_of_; flip; _$′_; _∘′_)
 open import Wna.Class.RawMonad                   using (RawMonad)
-open import Wna.Data.Container.Properties as Ccp using ()
+open import Wna.Data.Container.Conversion as Ccp using ()
 open import Wna.Primitive
-open import Wna.Monad.Identity.Container as Idc using ()
-open import Wna.Monad.Identity as Id using ()
-open import Wna.Monad.State.Base as St using ()
+open import Wna.Monad.Identity.Container  as Idc using ()
+open import Wna.Monad.Identity            as Id  using ()
+open import Wna.Monad.State.Base          as St  using ()
 
 -- todo: indexed state monad as a container
 

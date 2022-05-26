@@ -2,10 +2,10 @@
 
 module Wna.Monad.Identity.Container.Base where
 
-open import Data.Container.Combinator using (id)
-open import Data.Container.Core       using (Container; ⟦_⟧)
-open import Wna.Data.Container.Properties as Ccp using ()
-open import Data.Product              using (_,_)
+open import Data.Container.Combinator            using (id)
+open import Data.Container.Core                  using (Container; ⟦_⟧)
+open import Wna.Data.Container.Conversion as Ccp using ()
+open import Data.Product                         using (_,_)
 open import Wna.Primitive
 
 module _ {ℓ} where
