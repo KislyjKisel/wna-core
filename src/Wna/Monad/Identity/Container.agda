@@ -2,5 +2,5 @@
 
 module Wna.Monad.Identity.Container where
 
-open import Wna.Monad.Identity.Base public
-    using (Identity)
+open import Wna.Monad.Identity.Container.Base    public
+open import Wna.Monad.Identity.Container.Bundles public
