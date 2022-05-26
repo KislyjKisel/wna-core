@@ -12,7 +12,7 @@ open import Data.W                            as W    using (W; sup)
 open import Function.Base                             using (const; flip; _∘′_; _$′_)
 open import Wna.Class.RawMonad                        using (RawMonad)
 open import Wna.Class.Traversable             as Trav using (Traversable)
-open import Wna.Data.Container.Properties     as Cp   using ()
+open import Wna.Data.Container.Conversion     as Cp   using ()
 open import Wna.Monad.Free.Container                  using (FreeC)
 open import Wna.Primitive
 
