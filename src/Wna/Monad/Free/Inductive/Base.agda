@@ -40,6 +40,14 @@ module _ {ℓ} {F M : Container ℓ ℓ} ⦃ M-monad : RawMonad {aℓ = ℓ} ⟦
            (inj₂ pr , pos) → hpure pr
         )
 
+    fold' : ⦃ _ : Traversable {ℓ} ⟦ F ⟧ ⦄ {A B : Type ℓ} {M' : Type ℓ → Type ℓ} ⦃ _ : RawMonad M' ⦄ →
+            (∀{X} → ⟦ M ⟧ X → M' X) → (A → M' B) → (⟦ F ⟧ B → M' B) → FreeT F M A → M' B
+    fold' ⦃ _ ⦄ ⦃ M'm ⦄ m h g (mkFree w) = flip W.foldr w $′ λ t → (m $′ Cp.composition-from t) M'm.>>= λ where
+            (inj₁ fr , pos) → Trav.Instanced.sequenceA (fr , pos) M'm.>>= g
+            (inj₂ pr , pos) → h pr
+        where
+        module M'm = RawMonad M'm
+
     mapMonad : ∀{M'} → (∀{A : Type ℓ} → ⟦ M ⟧ A → ⟦ M' ⟧ A) → ∀{A} → FreeT F M A → FreeT F M' A
     mapMonad {M'} f (mkFree w) = mkFree $′ flip W.foldr w $′
         sup ∘′ Cp.composition-to ∘′ f ∘′ Cp.composition-from
