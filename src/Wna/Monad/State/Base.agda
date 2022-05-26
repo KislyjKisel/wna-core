@@ -34,6 +34,20 @@ StateI = StateTI Identity
 StateT : ∀{ℓ} → Type ℓ → MonT ℓ ℓ
 StateT S M = StateTI M S S
 
+module _ {ℓ} {S : Type ℓ} {M} {A : Type ℓ} where
+
+    makeT : (S → M (A × S)) → StateT S M A 
+    makeT f = makeTI f
+
+    runT : StateT S M A → S → M (A × S)
+    runT = runTI
+
+    evalT : ⦃ M-monad : RawMonad M ⦄ → StateT S M A → S → M A
+    evalT m = evalTI m
+
+    execT : ⦃ M-monad : RawMonad M ⦄ → StateT S M A → S → M S
+    execT m = execTI m
+
 StateIT : ∀{ℓ} → Type ℓ → MonIT ℓ ℓ
 StateIT S M i j = StateT S (M i j)
 
