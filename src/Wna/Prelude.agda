@@ -3,7 +3,7 @@
 module Wna.Prelude where
 
 open import Wna.Prelude.Std public
-    hiding (Maybe; List; Vec)
+    hiding (Maybe; List; Vec; Container)
 
 open import Wna.Prelude.Base public
 

@@ -4,7 +4,7 @@ module Wna.Prelude.Std where
 
 open import Wna.Primitive public
 
----- # Data
+-- # Data
 
 open import Data.Nat public
     using  (ℕ)
@@ -112,7 +112,14 @@ open import Data.Vec public
 
 module Vec = Data.Vec
 
----- # Function
+
+open import Data.Container.Core public
+    using (Container; ⟦_⟧)
+    hiding (module Container)
+
+module Container = Data.Container.Core
+
+-- # Function
 
 open import Function.Base public
     using

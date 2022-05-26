@@ -16,6 +16,12 @@ open import Wna.Data.Vec public
 
 module Vec = Wna.Data.Vec
 
+open import Wna.Data.Container
+    using (Container; ⟦_⟧)
+    hiding (module Container)
+
+module Container = Wna.Data.Container
+
 -- Classes
 
 open import Wna.Class.RawFunctor public
