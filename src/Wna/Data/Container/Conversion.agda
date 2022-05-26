@@ -1,6 +1,6 @@
 {-# OPTIONS --without-K --safe #-}
 
-module Wna.Data.Container.Properties where
+module Wna.Data.Container.Conversion where
 
 open import Data.Container.Combinator            as Cc    using ()
 open import Data.Container.Combinator.Properties
