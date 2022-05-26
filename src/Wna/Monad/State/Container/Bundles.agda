@@ -15,7 +15,7 @@ module _ {ℓ} {S : Type ℓ} {M : Container ℓ ℓ} ⦃ M-monad : RawMonad {�
         module M = RawMonad M-monad
 
     rawMonadT : RawMonad {ℓ} ⟦ StateT S M ⟧
-    rawMonadT = MkRawMonad.from:pure,>>= pure _>>=_
+    rawMonadT = MkRawMonad.from:pure,>>= pureT _>>=T_
 
 module _ {ℓ} {S : Type ℓ} where
 

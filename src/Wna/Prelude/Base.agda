@@ -16,7 +16,7 @@ open import Wna.Data.Vec public
 
 module Vec = Wna.Data.Vec
 
-open import Wna.Data.Container
+open import Wna.Data.Container public
     using (Container; ⟦_⟧)
     hiding (module Container)
 
