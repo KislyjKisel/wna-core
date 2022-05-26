@@ -62,15 +62,15 @@ fromForeignK {o = o} k = fromForeignKV $ Σ.map₁ k
 {-# FOREIGN GHC type AgdaMap kℓ vℓ = Data.Map.Lazy.Map #-}
 {-# COMPILE GHC Map = type AgdaMap #-}
 
-{-# COMPILE GHC empty        = \ kℓ vℓ    K V     → Data.Map.Lazy.empty        #-}
-{-# COMPILE GHC singleton    = \ kℓ vℓ    K V     → Data.Map.Lazy.singleton    #-}
-{-# COMPILE GHC fromList     = \ kℓ vℓ    K V   d → Data.Map.Lazy.fromList     #-}
-{-# COMPILE GHC insert       = \ kℓ vℓ    K V   d → Data.Map.Lazy.insert       #-}
-{-# COMPILE GHC insertWith   = \ kℓ vℓ    K V   d → Data.Map.Lazy.insertWith   #-}
-{-# COMPILE GHC delete       = \ kℓ vℓ    K V   d → Data.Map.Lazy.delete       #-}
-{-# COMPILE GHC adjust       = \ kℓ vℓ    K V   d → Data.Map.Lazy.adjust       #-}
-{-# COMPILE GHC update       = \ kℓ vℓ    K V   d → Data.Map.Lazy.update       #-}
-{-# COMPILE GHC alter        = \ kℓ vℓ    K V   d → Data.Map.Lazy.alter        #-}
-{-# COMPILE GHC foldr        = \ kℓ vℓ bℓ K V B   → Data.Map.Lazy.foldr        #-}
-{-# COMPILE GHC foldrWithKey = \ kℓ vℓ bℓ K V B   → Data.Map.Lazy.foldrWithKey #-}
-{-# COMPILE GHC toList       = \ kℓ vℓ    K V     → Data.Map.Lazy.toList       #-}
+{-# COMPILE GHC empty        = \ kℓ vℓ    K V     -> Data.Map.Lazy.empty        #-}
+{-# COMPILE GHC singleton    = \ kℓ vℓ    K V     -> Data.Map.Lazy.singleton    #-}
+{-# COMPILE GHC fromList     = \ kℓ vℓ    K V   d -> Data.Map.Lazy.fromList     #-}
+{-# COMPILE GHC insert       = \ kℓ vℓ    K V   d -> Data.Map.Lazy.insert       #-}
+{-# COMPILE GHC insertWith   = \ kℓ vℓ    K V   d -> Data.Map.Lazy.insertWith   #-}
+{-# COMPILE GHC delete       = \ kℓ vℓ    K V   d -> Data.Map.Lazy.delete       #-}
+{-# COMPILE GHC adjust       = \ kℓ vℓ    K V   d -> Data.Map.Lazy.adjust       #-}
+{-# COMPILE GHC update       = \ kℓ vℓ    K V   d -> Data.Map.Lazy.update       #-}
+{-# COMPILE GHC alter        = \ kℓ vℓ    K V   d -> Data.Map.Lazy.alter        #-}
+{-# COMPILE GHC foldr        = \ kℓ vℓ bℓ K V B   -> Data.Map.Lazy.foldr        #-}
+{-# COMPILE GHC foldrWithKey = \ kℓ vℓ bℓ K V B   -> Data.Map.Lazy.foldrWithKey #-}
+{-# COMPILE GHC toList       = \ kℓ vℓ    K V     -> Data.Map.Lazy.toList       #-}

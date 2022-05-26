@@ -13,7 +13,7 @@ open import Wna.Primitive
 postulate
     Ord : ∀{ℓ} → Type ℓ → Type ℓ
 
-{-# FOREIGN GHC data AgdaOrdDict _ a = Ord a => AgdaOrdDict #-}
+{-# FOREIGN GHC data AgdaOrdDict a b = Ord b => AgdaOrdDict #-}
 {-# COMPILE GHC Ord = type AgdaOrdDict #-}
 
 infix 4 _<_ _<=_ _>_ _>=_

@@ -12,7 +12,7 @@ postulate
 
     encode  : ∀{ℓ} {A : Type ℓ} ⦃ _ : ToJson A ⦄ → A → ByteString
 
-{-# FOREIGN GHC data AgdaToJsonDict _ a = Data.Aeson.ToJSON a => AgdaToJsonDict #-}
+{-# FOREIGN GHC data AgdaToJsonDict q a = Data.Aeson.ToJSON a => AgdaToJsonDict #-}
 {-# COMPILE GHC ToJson = type AgdaToJsonDict #-}
 
-{-# COMPILE GHC encode = \ ℓ A d → Data.Aeson.encode #-}
+{-# COMPILE GHC encode = \ ℓ A d -> Data.Aeson.encode #-}

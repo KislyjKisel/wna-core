@@ -8,7 +8,7 @@ open import Wna.Primitive
 postulate
     Eq : ∀{ℓ} → Type ℓ → Type ℓ
 
-{-# FOREIGN GHC data AgdaEqDict _ a = Eq a => AgdaEqDict #-}
+{-# FOREIGN GHC data AgdaEqDict a b = Eq b => AgdaEqDict #-}
 {-# COMPILE GHC Eq = type AgdaEqDict #-}
 
 infix 4 _==_ _/=_

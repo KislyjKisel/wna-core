@@ -17,5 +17,5 @@ postulate
 {-# FOREIGN GHC type AgdaKeyMap vℓ = Data.Aeson.KeyMap.KeyMap #-}
 {-# COMPILE GHC KeyMap = type AgdaKeyMap #-}
 
-{-# COMPILE GHC toMap   = \ vℓ V → Data.Aeson.KeyMap.toMap   #-}
-{-# COMPILE GHC fromMap = \ vℓ V → Data.Aeson.KeyMap.fromMap #-}
+{-# COMPILE GHC toMap   = \ vℓ V -> Data.Aeson.KeyMap.toMap   #-}
+{-# COMPILE GHC fromMap = \ vℓ V -> Data.Aeson.KeyMap.fromMap #-}
