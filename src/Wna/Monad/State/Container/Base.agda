@@ -50,11 +50,11 @@ module _ {ℓ} {S : Type ℓ} {M : Container ℓ ℓ} ⦃ M-monad : RawMonad {�
     from : ∀{A : Type ℓ} {M'} → (∀{A} → ⟦ M ⟧ A → M' A) → ⟦ StateT S M ⟧ A → St.StateT S M' A
     from m-repr m = St.makeT (m-repr ∘′ runT m)
 
-    pure : ∀{A : Type ℓ} → A → ⟦ StateT S M ⟧ A
-    pure = to (M.pure ∘′ Id.runIdentity) ∘′ St.pure
+    pureT : ∀{A : Type ℓ} → A → ⟦ StateT S M ⟧ A
+    pureT = to (M.pure ∘′ Id.runIdentity) ∘′ St.pure
 
-    _>>=_ : ∀{A B : Type ℓ} → ⟦ StateT S M ⟧ A → (A → ⟦ StateT S M ⟧ B) → ⟦ StateT S M ⟧ B
-    _>>=_ {A} x f = makeT λ s → runT x s M.>>= λ(x' , s') → runT (f x') s' 
+    _>>=T_ : ∀{A B : Type ℓ} → ⟦ StateT S M ⟧ A → (A → ⟦ StateT S M ⟧ B) → ⟦ StateT S M ⟧ B
+    _>>=T_ {A} x f = makeT λ s → runT x s M.>>= λ(x' , s') → runT (f x') s' 
 
 module _ {ℓ} {S : Type ℓ} where
 
@@ -69,3 +69,9 @@ module _ {ℓ} {S : Type ℓ} where
 
     exec : {A : Type ℓ} → ⟦ State S ⟧ A → S → S
     exec m = proj₂ ∘′ run m
+
+    pure : ∀{A : Type ℓ} → A → ⟦ State S ⟧ A
+    pure = pureT ⦃ Idc.rawMonad ⦄
+
+    _>>=_ : ∀{A B : Type ℓ} → ⟦ State S ⟧ A → (A → ⟦ State S ⟧ B) → ⟦ State S ⟧ B
+    _>>=_ = _>>=T_ ⦃ Idc.rawMonad ⦄
