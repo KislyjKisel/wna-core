@@ -58,6 +58,9 @@ module _ {ℓ} {S : Type ℓ} {M : Container ℓ ℓ} ⦃ M-monad : RawMonad {�
 
 module _ {ℓ} {S : Type ℓ} where
 
+    make : {A : Type ℓ} → (S → A × S) → ⟦ State S ⟧ A 
+    make f = makeT ⦃ Idc.rawMonad ⦄ (Idc.mkIdentity ∘′ f)
+
     run : {A : Type ℓ} → ⟦ State S ⟧ A → S → A × S
     run m = Idc.runIdentity ∘′ runT ⦃ Idc.rawMonad ⦄ m
 
