@@ -102,7 +102,11 @@ module Maybe where
     open import Wna.Monad.Maybe public
 
 open import Wna.Monad.Except.Base public
-    using (Except; ExceptT; mkExcept; runExcept)
+    using (Except; ExceptT)
+    renaming
+    ( make to mkExcept ; run to runExcept
+    ; makeT to mkExceptT ; runT to runExceptT
+    )
 
 module Except where
     open import Wna.Monad.Except public
@@ -118,6 +122,8 @@ open import Wna.Monad.State.Base public
     renaming
     ( make to mkState ; run to runState
     ; eval to evalState ; exec to execState
+    ; makeT to mkStateT ; runT to runStateT
+    ; evalT to evalStateT ; execT to execStateT
     ; makeTI to mkStateTI ; runTI to runStateTI
     ; evalTI to evalStateTI ; execTI to execStateTI
     )

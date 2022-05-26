@@ -16,14 +16,10 @@ open import Wna.Primitive
 module _ {eℓ} {E : Type eℓ} where
  
     rawMonadT : RawMonadT (ExceptT E)
-    rawMonadT = record
-        { rawIApplicative = MkRawMonad.pure,>>=⇒rawApplicative pure _>>=_
-        ; _>>=_           = _>>=_
-        ; join            = MkRawMonad.>>=⇒join _>>=_
-        }
+    rawMonadT = MkRawMonad.from:pure,>>= pureT _>>=T_
 
     rawMonad : RawMonad (Except E)
-    rawMonad = rawMonadT ⦃ Id.rawMonad ⦄
+    rawMonad = MkRawMonad.from:pure,>>= pure _>>=_
 
     rawApplicative : RawMonadT-RawApplicative (ExceptT E)
     rawApplicative = RawMonad.rawApplicative rawMonadT
@@ -33,13 +29,13 @@ module _ {eℓ} {E : Type eℓ} where
 
     monadRaise : ∀{M} ⦃ M-monad : RawMonad M ⦄ → MonadRaise E (ExceptT E M)
     monadRaise = record
-        { raise    = raise
+        { raise    = raiseT
         ; rawMonad = rawMonadT
         }
 
     monadHandle : ∀{M} ⦃ M-monad : RawMonad M ⦄ → MonadHandle E (ExceptT E M)
     monadHandle = record
-        { handle   = handle
+        { handle   = handleT
         ; rawMonad = rawMonadT
         }
 
