@@ -70,3 +70,8 @@ module _ {ℓ} {F M : Container ℓ ℓ} ⦃ M-monad : RawMonad {aℓ = ℓ} ⟦
 
     _>>=_ : ∀{A B} → FreeT F M A → (A → FreeT F M B) → FreeT F M B
     _>>=_ x f = join $′ map f x
+
+    -- todo: monadtrans working with containers
+    lift : ∀{A} → ⟦ M ⟧ A → FreeT F M A
+    lift = mkFree ∘′ W.sup ∘′
+        Cp.composition-to ∘′ M.map (Cp.sum-to ∘′ inj₂ ∘′ Cp.const-to)

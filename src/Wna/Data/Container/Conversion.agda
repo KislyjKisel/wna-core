@@ -40,12 +40,12 @@ module _ {s₁ℓ p₁ℓ s₂ℓ p₂ℓ} {C₁ : Container s₁ℓ p₁ℓ} {C
          where
 
     private
-        ∘-correct = Composition.correct C₁ C₂ {X = A}
+        composition-correct = Composition.correct C₁ C₂ {X = A}
     
-    open FunEq.Π (Inverse.to ∘-correct) public
+    open FunEq.Π (Inverse.to composition-correct) public
         using () renaming (_⟨$⟩_ to composition-from)
 
-    open FunEq.Π (Inverse.from ∘-correct) public
+    open FunEq.Π (Inverse.from composition-correct) public
         using () renaming (_⟨$⟩_ to composition-to)
 
 module _ {s₁ℓ p₁ℓ s₂ℓ p₂ℓ} {C₁ : Container s₁ℓ p₁ℓ} {C₂ : Container s₂ℓ p₂ℓ}
@@ -58,12 +58,25 @@ module _ {s₁ℓ p₁ℓ s₂ℓ p₂ℓ} {C₁ : Container s₁ℓ p₁ℓ} {C
     product-to : ⟦ C₁ ⟧ A × ⟦ C₂ ⟧ A → ⟦ C₁ Cc.× C₂ ⟧ A
     product-to ((s₁ , f₁) , (s₂ , f₂)) = (s₁ , s₂) , ⊎.[ f₁ , f₂ ]′
 
+module _ {s₁ℓ s₂ℓ pℓ} {C₁ : Container s₁ℓ pℓ} {C₂ : Container s₂ℓ pℓ}
+         {aℓ} {A : Type aℓ}
+         where
+
+    private
+        sum-correct = Sum.correct C₁ C₂ {X = A}
+
+    open FunEq.Π (Inverse.to sum-correct) public
+        using () renaming (_⟨$⟩_ to sum-from)
+
+    open FunEq.Π (Inverse.from sum-correct) public
+        using () renaming (_⟨$⟩_ to sum-to)   
+
 module _ {iℓ sℓ pℓ} {I : Type iℓ} {C : Container sℓ pℓ} {aℓ} {A : Type aℓ} where
     private
-        const[]⟶-correct = ConstantExponentiation.correct {I = I} C {X = A}
+        constexp-correct = ConstantExponentiation.correct {I = I} C {X = A}
 
-    open FunEq.Π (Inverse.to const[]⟶-correct) public
+    open FunEq.Π (Inverse.to constexp-correct) public
         using () renaming (_⟨$⟩_ to constexp-from)
 
-    open FunEq.Π (Inverse.from const[]⟶-correct) public
+    open FunEq.Π (Inverse.from constexp-correct) public
         using () renaming (_⟨$⟩_ to constexp-to)
