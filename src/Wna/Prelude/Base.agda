@@ -10,16 +10,30 @@ open import Wna.Data.List public
 
 module List = Wna.Data.List
 
+open import Wna.Data.Vec public
+    using  (Vec)
+    hiding (module Vec)
+
+module Vec = Wna.Data.Vec
+
 -- Classes
 
 open import Wna.Class.RawFunctor public
-    using (RawFunctor)
+    using (RawFunctor; module FunctorFT; module MkRawFunctor)
 
 open import Wna.Class.RawApplicative public
-    using (RawApplicative)
+    using
+    ( RawApplicative
+    ; module IApplicativeFT ; module ApplicativeFT
+    ; module MkRawApplicative ; module MkRawIApplicative
+    )
 
 open import Wna.Class.RawMonad public
-    using (RawMonad)
+    using
+    ( RawMonad
+    ; module IMonadFT ; module MonadFT
+    ; module MkRawMonad ; module MkRawIMonad
+    )
 
 open import Wna.Class.Cast public
     using (Cast[_⇒_])
