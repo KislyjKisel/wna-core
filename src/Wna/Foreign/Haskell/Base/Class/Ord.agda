@@ -42,14 +42,14 @@ clamp′ p = clamp (coerce p)
 
 -- todo: postulated properties?
 
-{-# COMPILE GHC _<_  = \ ℓ A d -> (<)  #-}
-{-# COMPILE GHC _<=_ = \ ℓ A d -> (<=) #-}
-{-# COMPILE GHC _>_  = \ ℓ A d -> (>)  #-}
-{-# COMPILE GHC _>=_ = \ ℓ A d -> (>=) #-}
+{-# COMPILE GHC _<_  = \ ℓ a d -> (<)  #-}
+{-# COMPILE GHC _<=_ = \ ℓ a d -> (<=) #-}
+{-# COMPILE GHC _>_  = \ ℓ a d -> (>)  #-}
+{-# COMPILE GHC _>=_ = \ ℓ a d -> (>=) #-}
 
-{-# COMPILE GHC compare = \ ℓ A d -> compare #-}
-{-# COMPILE GHC min     = \ ℓ A d -> min #-}
-{-# COMPILE GHC max     = \ ℓ A d -> max #-}
+{-# COMPILE GHC compare = \ ℓ a d -> compare #-}
+{-# COMPILE GHC min     = \ ℓ a d -> min #-}
+{-# COMPILE GHC max     = \ ℓ a d -> max #-}
 
-{-# COMPILE GHC comparing = \ ℓ A B d -> comparing #-}
-{-# COMPILE GHC clamp     = \ ℓ A   d -> clamp     #-}
+{-# COMPILE GHC comparing = \ ℓ a b d -> comparing #-}
+{-# COMPILE GHC clamp     = \ ℓ a   d -> clamp     #-}
