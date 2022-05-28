@@ -6,6 +6,8 @@ open import Data.Char.Base                           using (Char)
 open import Data.List.Base                           using (List)
 open import Data.Maybe.Base                          using (Maybe)
 open import Foreign.Haskell.Either                   using (Either)
+open import Wna.Foreign.Haskell.Aeson.Value.Base     using (Value)
+open import Wna.Foreign.Haskell.Aeson.Parser         using (Parser)
 open import Wna.Foreign.Haskell.ByteString.Lazy.Base using (ByteString)
 open import Wna.Primitive
 
@@ -17,13 +19,16 @@ postulate
     decode  : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Maybe A
     decode' : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Maybe A
 
+    parseJson : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → Value → Parser A 
+
     eitherDecode  : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Either (List Char) A
     eitherDecode' : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Either (List Char) A
 
 {-# FOREIGN GHC data AgdaFromJsonDict a b = Data.Aeson.FromJSON b => AgdaFromJsonDict #-}
 {-# COMPILE GHC FromJson = type AgdaFromJsonDict #-}
 
-{-# COMPILE GHC decode        = \ ℓ a d -> Data.Aeson.decode        #-}
-{-# COMPILE GHC decode'       = \ ℓ a d -> Data.Aeson.decode'       #-}
-{-# COMPILE GHC eitherDecode  = \ ℓ a d -> Data.Aeson.eitherDecode  #-}
-{-# COMPILE GHC eitherDecode' = \ ℓ a d -> Data.Aeson.eitherDecode' #-}
+{-# COMPILE GHC decode        = \ ℓ a AgdaFromJsonDict -> Data.Aeson.decode        #-}
+{-# COMPILE GHC decode'       = \ ℓ a AgdaFromJsonDict -> Data.Aeson.decode'       #-}
+{-# COMPILE GHC parseJson     = \ ℓ a AgdaFromJsonDict -> Data.Aeson.parseJSON     #-}
+{-# COMPILE GHC eitherDecode  = \ ℓ a AgdaFromJsonDict -> Data.Aeson.eitherDecode  #-}
+{-# COMPILE GHC eitherDecode' = \ ℓ a AgdaFromJsonDict -> Data.Aeson.eitherDecode' #-}

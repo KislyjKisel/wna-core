@@ -19,5 +19,5 @@ postulate
 
 -- todo: postulated properties?
 
-{-# COMPILE GHC _==_ = \ ℓ a d -> (==) #-}
-{-# COMPILE GHC _/=_ = \ ℓ a d -> (/=) #-}
+{-# COMPILE GHC _==_ = \ ℓ a AgdaEqDict -> (==) #-}
+{-# COMPILE GHC _/=_ = \ ℓ a AgdaEqDict -> (/=) #-}

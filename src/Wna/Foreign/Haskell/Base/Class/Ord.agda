@@ -13,6 +13,8 @@ open import Wna.Primitive
 postulate
     Ord : ∀{ℓ} → Type ℓ → Type ℓ
 
+{-# FOREIGN GHC import qualified Data.Ord #-}
+
 {-# FOREIGN GHC data AgdaOrdDict a b = Ord b => AgdaOrdDict #-}
 {-# COMPILE GHC Ord = type AgdaOrdDict #-}
 
@@ -42,14 +44,14 @@ clamp′ p = clamp (coerce p)
 
 -- todo: postulated properties?
 
-{-# COMPILE GHC _<_  = \ ℓ a d -> (<)  #-}
-{-# COMPILE GHC _<=_ = \ ℓ a d -> (<=) #-}
-{-# COMPILE GHC _>_  = \ ℓ a d -> (>)  #-}
-{-# COMPILE GHC _>=_ = \ ℓ a d -> (>=) #-}
+{-# COMPILE GHC _<_  = \ ℓ a AgdaOrdDict -> (<)  #-}
+{-# COMPILE GHC _<=_ = \ ℓ a AgdaOrdDict -> (<=) #-}
+{-# COMPILE GHC _>_  = \ ℓ a AgdaOrdDict -> (>)  #-}
+{-# COMPILE GHC _>=_ = \ ℓ a AgdaOrdDict -> (>=) #-}
 
-{-# COMPILE GHC compare = \ ℓ a d -> compare #-}
-{-# COMPILE GHC min     = \ ℓ a d -> min #-}
-{-# COMPILE GHC max     = \ ℓ a d -> max #-}
+{-# COMPILE GHC compare = \ ℓ a AgdaOrdDict -> compare #-}
+{-# COMPILE GHC min     = \ ℓ a AgdaOrdDict -> min #-}
+{-# COMPILE GHC max     = \ ℓ a AgdaOrdDict -> max #-}
 
-{-# COMPILE GHC comparing = \ ℓ a b d -> comparing #-}
-{-# COMPILE GHC clamp     = \ ℓ a   d -> clamp     #-}
+{-# COMPILE GHC comparing = \ ℓ a b AgdaOrdDict -> Data.Ord.comparing #-}
+{-# COMPILE GHC clamp     = \ ℓ a   AgdaOrdDict -> Data.Ord.clamp     #-}

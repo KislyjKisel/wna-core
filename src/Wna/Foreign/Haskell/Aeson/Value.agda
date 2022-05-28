@@ -10,24 +10,19 @@ open import Data.Tree.AVL.Map                                as AVL    using ()
 open import Function.Base                                              using (_$_)
 open import Wna.Foreign.Haskell.Aeson.FromJson                         using (FromJson)
 open import Wna.Foreign.Haskell.Aeson.Key                    as Key    using ()
-open import Wna.Foreign.Haskell.Aeson.KeyMap                 as KeyMap using (KeyMap)
+open import Wna.Foreign.Haskell.Aeson.KeyMap                 as KeyMap using ()
 open import Wna.Foreign.Haskell.Aeson.ToJson                           using (ToJson)
 open import Wna.Foreign.Haskell.Containers.Map.Lazy.Base     as Map    using ()
-open import Wna.Foreign.Haskell.Containers.Vector.Boxed.Base as Vec    using (Vector)
-open import Wna.Foreign.Haskell.Scientific.Base              as Sci    using (Scientific)
+open import Wna.Foreign.Haskell.Containers.Vector.Boxed.Base as Vec    using ()
+open import Wna.Foreign.Haskell.Scientific.Base              as Sci    using ()
 open import Wna.Serialization.Json.Value                     as Safe   using ()
 open import Wna.Primitive
 
-{-# FOREIGN GHC import qualified Data.Aeson #-}
+open import Wna.Foreign.Haskell.Aeson.Value.Base public
 
-{-# NO_POSITIVITY_CHECK #-}
-data Value : Type where
-    object : KeyMap Value → Value
-    array  : Vector Value → Value
-    string : String       → Value
-    number : Scientific   → Value
-    bool   : Bool         → Value
-    null   :                Value
+{-# FOREIGN GHC import qualified Data.Aeson #-}
+{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Aeson.ToJson (AgdaToJsonDict(AgdaToJsonDict)) #-}
+{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Aeson.FromJson (AgdaFromJsonDict(AgdaFromJsonDict)) #-}
 
 {-# TERMINATING #-}
 toForeign : Safe.Value → Value
@@ -51,6 +46,5 @@ postulate
     fromJson : FromJson Value
     toJson   : ToJson   Value
 
-{-# COMPILE GHC Value = data Data.Aeson.Value (Object | Array | String | Number | Bool | Null) #-}
 {-# COMPILE GHC fromJson = AgdaFromJsonDict #-}
 {-# COMPILE GHC toJson   = AgdaToJsonDict   #-}

@@ -14,6 +14,7 @@ open import Wna.Foreign.Haskell.Base.Class.Ord         using (Ord)
 open import Wna.Primitive
 
 {-# FOREIGN GHC import qualified Data.Map.Lazy #-}
+{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Base.Class.Ord (AgdaOrdDict(AgdaOrdDict)) #-}
 
 postulate
     Map : ∀{kℓ vℓ} → (K : Type kℓ) → (V : Type vℓ) → Type (kℓ ℓ⊔ vℓ)
@@ -62,15 +63,15 @@ fromForeignK {o = o} k = fromForeignKV $ Σ.map₁ k
 {-# FOREIGN GHC type AgdaMap kℓ vℓ = Data.Map.Lazy.Map #-}
 {-# COMPILE GHC Map = type AgdaMap #-}
 
-{-# COMPILE GHC empty        = \ kℓ vℓ    k v     -> Data.Map.Lazy.empty        #-}
-{-# COMPILE GHC singleton    = \ kℓ vℓ    k v     -> Data.Map.Lazy.singleton    #-}
-{-# COMPILE GHC fromList     = \ kℓ vℓ    k v   d -> Data.Map.Lazy.fromList     #-}
-{-# COMPILE GHC insert       = \ kℓ vℓ    k v   d -> Data.Map.Lazy.insert       #-}
-{-# COMPILE GHC insertWith   = \ kℓ vℓ    k v   d -> Data.Map.Lazy.insertWith   #-}
-{-# COMPILE GHC delete       = \ kℓ vℓ    k v   d -> Data.Map.Lazy.delete       #-}
-{-# COMPILE GHC adjust       = \ kℓ vℓ    k v   d -> Data.Map.Lazy.adjust       #-}
-{-# COMPILE GHC update       = \ kℓ vℓ    k v   d -> Data.Map.Lazy.update       #-}
-{-# COMPILE GHC alter        = \ kℓ vℓ    k v   d -> Data.Map.Lazy.alter        #-}
-{-# COMPILE GHC foldr        = \ kℓ vℓ bℓ k v b   -> Data.Map.Lazy.foldr        #-}
-{-# COMPILE GHC foldrWithKey = \ kℓ vℓ bℓ k v b   -> Data.Map.Lazy.foldrWithKey #-}
-{-# COMPILE GHC toList       = \ kℓ vℓ    k v     -> Data.Map.Lazy.toList       #-}
+{-# COMPILE GHC empty        = \ kℓ vℓ    k v               -> Data.Map.Lazy.empty        #-}
+{-# COMPILE GHC singleton    = \ kℓ vℓ    k v               -> Data.Map.Lazy.singleton    #-}
+{-# COMPILE GHC fromList     = \ kℓ vℓ    k v   AgdaOrdDict -> Data.Map.Lazy.fromList     #-}
+{-# COMPILE GHC insert       = \ kℓ vℓ    k v   AgdaOrdDict -> Data.Map.Lazy.insert       #-}
+{-# COMPILE GHC insertWith   = \ kℓ vℓ    k v   AgdaOrdDict -> Data.Map.Lazy.insertWith   #-}
+{-# COMPILE GHC delete       = \ kℓ vℓ    k v   AgdaOrdDict -> Data.Map.Lazy.delete       #-}
+{-# COMPILE GHC adjust       = \ kℓ vℓ    k v   AgdaOrdDict -> Data.Map.Lazy.adjust       #-}
+{-# COMPILE GHC update       = \ kℓ vℓ    k v   AgdaOrdDict -> Data.Map.Lazy.update       #-}
+{-# COMPILE GHC alter        = \ kℓ vℓ    k v   AgdaOrdDict -> Data.Map.Lazy.alter        #-}
+{-# COMPILE GHC foldr        = \ kℓ vℓ bℓ k v b             -> Data.Map.Lazy.foldr        #-}
+{-# COMPILE GHC foldrWithKey = \ kℓ vℓ bℓ k v b             -> Data.Map.Lazy.foldrWithKey #-}
+{-# COMPILE GHC toList       = \ kℓ vℓ    k v               -> Data.Map.Lazy.toList       #-}

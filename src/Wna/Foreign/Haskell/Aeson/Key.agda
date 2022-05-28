@@ -10,6 +10,8 @@ open import Wna.Foreign.Haskell.Base.Class.Ord using (Ord)
 open import Wna.Primitive
 
 {-# FOREIGN GHC import qualified Data.Aeson.Key #-}
+{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Base.Class.Ord (AgdaOrdDict(AgdaOrdDict)) #-}
+{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Base.Class.Eq (AgdaEqDict(AgdaEqDict)) #-}
 
 postulate
     Key : Type
