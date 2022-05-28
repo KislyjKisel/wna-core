@@ -61,7 +61,9 @@ module ⊎ = Data.Sum
 
 open import Data.Bool public
     using (Bool; true; false; if_then_else_)
+    hiding (module Bool)
 
+module Bool = Data.Bool
 
 open import Data.Unit public
     using (⊤; tt)
