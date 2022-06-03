@@ -6,6 +6,7 @@ open import Data.Char.Base                           using (Char)
 open import Data.List.Base                           using (List)
 open import Data.Maybe.Base                          using (Maybe)
 open import Foreign.Haskell.Either                   using (Either)
+open import IO.Primitive                             using (IO)
 open import Wna.Foreign.Haskell.Aeson.Value.Base     using (Value)
 open import Wna.Foreign.Haskell.Aeson.Parser         using (Parser)
 open import Wna.Foreign.Haskell.ByteString.Lazy.Base using (ByteString)
@@ -24,7 +25,7 @@ postulate
     eitherDecode  : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Either (List Char) A
     eitherDecode' : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Either (List Char) A
 
-    eitherDecodeFileStrict' : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → List Char → Either (List Char) A
+    eitherDecodeFileStrict' : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → List Char → IO (Either (List Char) A)
 
 {-# FOREIGN GHC data AgdaFromJsonDict a b = Data.Aeson.FromJSON b => AgdaFromJsonDict #-}
 {-# COMPILE GHC FromJson = type AgdaFromJsonDict #-}
