@@ -24,11 +24,14 @@ postulate
     eitherDecode  : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Either (List Char) A
     eitherDecode' : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → ByteString → Either (List Char) A
 
+    eitherDecodeFileStrict' : ∀{ℓ} {A : Type ℓ} ⦃ _ : FromJson A ⦄ → List Char → Either (List Char) A
+
 {-# FOREIGN GHC data AgdaFromJsonDict a b = Data.Aeson.FromJSON b => AgdaFromJsonDict #-}
 {-# COMPILE GHC FromJson = type AgdaFromJsonDict #-}
 
-{-# COMPILE GHC decode        = \ ℓ a AgdaFromJsonDict -> Data.Aeson.decode        #-}
-{-# COMPILE GHC decode'       = \ ℓ a AgdaFromJsonDict -> Data.Aeson.decode'       #-}
-{-# COMPILE GHC parseJson     = \ ℓ a AgdaFromJsonDict -> Data.Aeson.parseJSON     #-}
-{-# COMPILE GHC eitherDecode  = \ ℓ a AgdaFromJsonDict -> Data.Aeson.eitherDecode  #-}
-{-# COMPILE GHC eitherDecode' = \ ℓ a AgdaFromJsonDict -> Data.Aeson.eitherDecode' #-}
+{-# COMPILE GHC decode                  = \ ℓ a AgdaFromJsonDict -> Data.Aeson.decode                  #-}
+{-# COMPILE GHC decode'                 = \ ℓ a AgdaFromJsonDict -> Data.Aeson.decode'                 #-}
+{-# COMPILE GHC parseJson               = \ ℓ a AgdaFromJsonDict -> Data.Aeson.parseJSON               #-}
+{-# COMPILE GHC eitherDecode            = \ ℓ a AgdaFromJsonDict -> Data.Aeson.eitherDecode            #-}
+{-# COMPILE GHC eitherDecode'           = \ ℓ a AgdaFromJsonDict -> Data.Aeson.eitherDecode'           #-}
+{-# COMPILE GHC eitherDecodeFileStrict' = \ ℓ a AgdaFromJsonDict -> Data.Aeson.eitherDecodeFileStrict' #-}
