@@ -2,8 +2,8 @@
 
 module Wna.Foreign.Haskell.Base.Control.Concurrent where
 
-open import Data.Unit.Polymorphic       using (⊤)
-open import IO.Primitive          as IO using (IO)
+open import Data.Unit.          using (⊤)
+open import IO.Primitive  as IO using (IO)
 open import Wna.Primitive
 
 {-# FOREIGN GHC import qualified Control.Concurrent #-}
@@ -11,7 +11,7 @@ open import Wna.Primitive
 postulate
     ThreadId : Type
 
-    forkIO : IO {0ℓ} ⊤ → IO ThreadId
+    forkIO : IO ⊤ → IO ThreadId
 
 {-# COMPILE GHC ThreadId = type Control.Concurrent.ThreadId #-}
 

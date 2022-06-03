@@ -4,7 +4,7 @@ module Wna.Foreign.Haskell.Base.Control.Concurrent.MVar where
 
 open import Data.Bool.Base              using (Bool)
 open import Data.Maybe.Base             using (Maybe)
-open import Data.Unit.Polymorphic       using (⊤)
+open import Data.Unit                   using (⊤)
 open import Foreign.Haskell.Pair        using (Pair)
 open import IO.Primitive          as IO using (IO)
 open import Wna.Primitive
@@ -17,7 +17,7 @@ postulate
     newEmptyMVar     : ∀{aℓ   } {A : Type aℓ}               → IO (MVar A)
     newMVar          : ∀{aℓ   } {A : Type aℓ}               → A → IO (MVar A)
     takeMVar         : ∀{aℓ   } {A : Type aℓ}               → MVar A → IO A
-    putMVar          : ∀{aℓ   } {A : Type aℓ}               → MVar A → A → IO {0ℓ} ⊤
+    putMVar          : ∀{aℓ   } {A : Type aℓ}               → MVar A → A → IO ⊤
     readMVar         : ∀{aℓ   } {A : Type aℓ}               → MVar A → IO A
     swapMVar         : ∀{aℓ   } {A : Type aℓ}               → MVar A → A → IO A
     tryTakeMVar      : ∀{aℓ   } {A : Type aℓ}               → MVar A → IO (Maybe A)
