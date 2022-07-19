@@ -1,6 +1,6 @@
 {-# OPTIONS --without-K #-}
 
-module Wna.Foreign.Haskell.Base.Class.Eq where
+module Wna.Foreign.Haskell.Base.Data.Eq where
 
 open import Data.Bool.Base using (Bool)
 open import Wna.Primitive

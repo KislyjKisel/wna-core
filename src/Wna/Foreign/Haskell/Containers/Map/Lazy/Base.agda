@@ -10,11 +10,11 @@ open import Foreign.Haskell.Coerce                     using (coerce)
 open import Foreign.Haskell.Pair                       using (Pair)
 open import Function.Base                              using (_$_; _∘′_)
 open import Relation.Binary.Bundles                    using (StrictTotalOrder)
-open import Wna.Foreign.Haskell.Base.Class.Ord         using (Ord)
+open import Wna.Foreign.Haskell.Base.Data.Ord          using (Ord)
 open import Wna.Primitive
 
 {-# FOREIGN GHC import qualified Data.Map.Lazy #-}
-{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Base.Class.Ord (AgdaOrdDict(AgdaOrdDict)) #-}
+{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Base.Data.Ord (AgdaOrdDict(AgdaOrdDict)) #-}
 
 postulate
     Map : ∀{kℓ vℓ} → (K : Type kℓ) → (V : Type vℓ) → Type (kℓ ℓ⊔ vℓ)

@@ -5,13 +5,13 @@ module Wna.Foreign.Haskell.Aeson.Key where
 open import Data.Char.Base                     using (Char)
 open import Data.List.Base                     using (List)
 open import Data.String.Base                   using (String)
-open import Wna.Foreign.Haskell.Base.Class.Eq  using (Eq)
-open import Wna.Foreign.Haskell.Base.Class.Ord using (Ord)
+open import Wna.Foreign.Haskell.Base.Data.Eq   using (Eq)
+open import Wna.Foreign.Haskell.Base.Data.Ord  using (Ord)
 open import Wna.Primitive
 
 {-# FOREIGN GHC import qualified Data.Aeson.Key #-}
-{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Base.Class.Ord (AgdaOrdDict(AgdaOrdDict)) #-}
-{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Base.Class.Eq (AgdaEqDict(AgdaEqDict)) #-}
+{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Base.Data.Ord (AgdaOrdDict(AgdaOrdDict)) #-}
+{-# FOREIGN GHC import MAlonzo.Code.Wna.Foreign.Haskell.Base.Data.Eq (AgdaEqDict(AgdaEqDict)) #-}
 
 postulate
     Key : Type

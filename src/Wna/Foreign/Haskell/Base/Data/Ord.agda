@@ -1,6 +1,6 @@
 {-# OPTIONS --without-K #-}
 
-module Wna.Foreign.Haskell.Base.Class.Ord where
+module Wna.Foreign.Haskell.Base.Data.Ord where
 
 open import Data.Bool.Base                                 using (Bool)
 open import Data.Product                                   using (_×_)
