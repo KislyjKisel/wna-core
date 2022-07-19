@@ -5,6 +5,9 @@ module Wna.Foreign.Haskell.Stm where
 open import Data.Bool.Base using (Bool)
 open import Data.Unit      using (⊤)
 open import IO.Primitive   using (IO)
+open import Wna.Foreign.Haskell.Base.Control.Applicative using (Applicative)
+open import Wna.Foreign.Haskell.Base.Control.Monad       using (Monad)
+open import Wna.Foreign.Haskell.Base.Data.Functor        using (Functor)
 open import Wna.Primitive
 
 {-# FOREIGN GHC import qualified Control.Concurrent.STM #-}
@@ -19,7 +22,9 @@ postulate
     -- throwSTM requires Exceptions
     -- catchSTM same
 
-    -- todo: functor/applicative/monad instances for STM 
+    functor     : ∀{ℓ} → Functor {ℓ} STM
+    applicative : ∀{ℓ} → Applicative {ℓ} STM
+    monad       : ∀{ℓ} → Monad {ℓ} STM
 
 {-# FOREIGN GHC AgdaSTM ℓ = type Control.Concurrent.STM.STM #-}
 {-# COMPILE GHC STM = type AgdaSTM #-}
@@ -28,3 +33,7 @@ postulate
 {-# COMPILE GHC retry      = \ aℓ a → Control.Concurrent.STM.retry      #-}
 {-# COMPILE GHC orElse     = \ aℓ a → Control.Concurrent.STM.orElse     #-}
 {-# COMPILE GHC check      = \ ℓ    → Control.Concurrent.STM.check      #-}
+
+{-# COMPILE GHC functor     = \ ℓ -> AgdaFunctorDict     #-}
+{-# COMPILE GHC applicative = \ ℓ -> AgdaApplicativeDict #-}
+{-# COMPILE GHC monad       = \ ℓ -> AgdaMonadDict       #-}

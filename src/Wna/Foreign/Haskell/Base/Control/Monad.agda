@@ -21,5 +21,3 @@ postulate
 {-# COMPILE GHC return = \ ℓ a   f AgdaMonadDict -> Control.Monad.return #-}
 {-# COMPILE GHC _>>=_  = \ ℓ a b f AgdaMonadDict -> (Control.Monad.>>=)  #-}
 {-# COMPILE GHC _>>_   = \ ℓ a b f AgdaMonadDict -> (Control.Monad.>>)   #-}
-
--- {-# COMPILE GHC = \ ℓ a ->  #-}
