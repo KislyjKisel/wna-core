@@ -28,7 +28,7 @@ postulate
     
     -- mkWeakTVar : ∀{ℓ} {A : Type ℓ} → TVar A → IO ⊤ → IO (Weak (TVar A))
 
-{-# FOREIGN GHC AgdaTVar ℓ = type Control.Concurrent.STM.TVar.TVar #-}
+{-# FOREIGN GHC type AgdaTVar ℓ = Control.Concurrent.STM.TVar.TVar #-}
 {-# COMPILE GHC TVar = type AgdaTVar #-}
 
 {-# COMPILE GHC newTVar       = \ ℓ a   -> Control.Concurrent.STM.TVar.newTVar       #-}

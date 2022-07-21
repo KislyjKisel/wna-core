@@ -31,22 +31,22 @@ postulate
     mkWeakMVar       : ∀{aℓ   } {A : Type aℓ}               → MVar A → IO (Maybe A)
 
 
-{-# FOREIGN GHC AgdaMVar ℓ = type Control.Concurrent.MVar.MVar #-}
+{-# FOREIGN GHC type AgdaMVar ℓ = Control.Concurrent.MVar.MVar #-}
 {-# COMPILE GHC MVar = type AgdaMVar #-}
 
-{-# COMPILE GHC newEmptyMVar     = \ aℓ a      → Control.Concurrent.MVar.newEmptyMVar     #-}
-{-# COMPILE GHC newMVar          = \ aℓ a      → Control.Concurrent.MVar.newMVar          #-}
-{-# COMPILE GHC takeMVar         = \ aℓ a      → Control.Concurrent.MVar.takeMVar         #-}
-{-# COMPILE GHC putMVar          = \ aℓ a      → Control.Concurrent.MVar.putMVar          #-}
-{-# COMPILE GHC readMVar         = \ aℓ a      → Control.Concurrent.MVar.readMVar         #-}
-{-# COMPILE GHC swapMVar         = \ aℓ a      → Control.Concurrent.MVar.swapMVar         #-}
-{-# COMPILE GHC tryTakeMVar      = \ aℓ a      → Control.Concurrent.MVar.tryTakeMVar      #-}
-{-# COMPILE GHC tryPutMVar       = \ aℓ a      → Control.Concurrent.MVar.tryPutMVar       #-}
-{-# COMPILE GHC isEmptyMVar      = \ aℓ a      → Control.Concurrent.MVar.isEmptyMVar      #-}
-{-# COMPILE GHC withMVar         = \ aℓ bℓ a b → Control.Concurrent.MVar.withMVar         #-}
-{-# COMPILE GHC withMVarMasked   = \ aℓ bℓ a b → Control.Concurrent.MVar.withMVarMasked   #-}
-{-# COMPILE GHC modifyMVar       = \ aℓ bℓ a b → Control.Concurrent.MVar.modifyMVar       #-}
-{-# COMPILE GHC modifyMVarMasked = \ aℓ bℓ a b → Control.Concurrent.MVar.modifyMVarMasked #-}
-{-# COMPILE GHC tryReadMVar      = \ aℓ a      → Control.Concurrent.MVar.tryReadMVar      #-}
-{-# COMPILE GHC mkWeakMVar       = \ aℓ a      → Control.Concurrent.MVar.mkWeakMVar       #-}
+{-# COMPILE GHC newEmptyMVar     = \ aℓ a      -> Control.Concurrent.MVar.newEmptyMVar     #-}
+{-# COMPILE GHC newMVar          = \ aℓ a      -> Control.Concurrent.MVar.newMVar          #-}
+{-# COMPILE GHC takeMVar         = \ aℓ a      -> Control.Concurrent.MVar.takeMVar         #-}
+{-# COMPILE GHC putMVar          = \ aℓ a      -> Control.Concurrent.MVar.putMVar          #-}
+{-# COMPILE GHC readMVar         = \ aℓ a      -> Control.Concurrent.MVar.readMVar         #-}
+{-# COMPILE GHC swapMVar         = \ aℓ a      -> Control.Concurrent.MVar.swapMVar         #-}
+{-# COMPILE GHC tryTakeMVar      = \ aℓ a      -> Control.Concurrent.MVar.tryTakeMVar      #-}
+{-# COMPILE GHC tryPutMVar       = \ aℓ a      -> Control.Concurrent.MVar.tryPutMVar       #-}
+{-# COMPILE GHC isEmptyMVar      = \ aℓ a      -> Control.Concurrent.MVar.isEmptyMVar      #-}
+{-# COMPILE GHC withMVar         = \ aℓ bℓ a b -> Control.Concurrent.MVar.withMVar         #-}
+{-# COMPILE GHC withMVarMasked   = \ aℓ bℓ a b -> Control.Concurrent.MVar.withMVarMasked   #-}
+{-# COMPILE GHC modifyMVar       = \ aℓ bℓ a b -> Control.Concurrent.MVar.modifyMVar       #-}
+{-# COMPILE GHC modifyMVarMasked = \ aℓ bℓ a b -> Control.Concurrent.MVar.modifyMVarMasked #-}
+{-# COMPILE GHC tryReadMVar      = \ aℓ a      -> Control.Concurrent.MVar.tryReadMVar      #-}
+{-# COMPILE GHC mkWeakMVar       = \ aℓ a      -> Control.Concurrent.MVar.mkWeakMVar       #-}
     

@@ -16,7 +16,7 @@ postulate
 
     pure   : ∀{ℓ} {A    } {F : Type ℓ → Type ℓ} ⦃ _ : Applicative F ⦄ → A → F A
     _<*>_  : ∀{ℓ} {A B  } {F : Type ℓ → Type ℓ} ⦃ _ : Applicative F ⦄ → F (A → B) → F A → F B
-    liftA2 : ∀{ℓ} {A B C} {F : Type ℓ → Type ℓ} ⦃ _ : Applicative F ⦄ → A → B → C → F A → F B → F C
+    liftA2 : ∀{ℓ} {A B C} {F : Type ℓ → Type ℓ} ⦃ _ : Applicative F ⦄ → (A → B → C) → F A → F B → F C
     _<*_   : ∀{ℓ} {A B  } {F : Type ℓ → Type ℓ} ⦃ _ : Applicative F ⦄ → F A → F B → F A
     _*>_   : ∀{ℓ} {A B  } {F : Type ℓ → Type ℓ} ⦃ _ : Applicative F ⦄ → F A → F B → F B
 
@@ -25,10 +25,10 @@ postulate
     some  : ∀{ℓ} {A} {F : Type ℓ → Type ℓ} ⦃ _ : Alternative F ⦄ → F A → F (List A)
     many  : ∀{ℓ} {A} {F : Type ℓ → Type ℓ} ⦃ _ : Alternative F ⦄ → F A → F (List A)
 
-{-# FOREIGN GHC data AgdaApplicativeDict a b = Applicative b => AgdaApplicativeDict #-}
+{-# FOREIGN GHC data AgdaApplicativeDict a b = Control.Applicative.Applicative b => AgdaApplicativeDict #-}
 {-# COMPILE GHC Applicative = type AgdaApplicativeDict #-}
 
-{-# FOREIGN GHC data AgdaAlternativeDict a b = Alternative b => AgdaAlternativeDict #-}
+{-# FOREIGN GHC data AgdaAlternativeDict a b = Control.Applicative.Alternative b => AgdaAlternativeDict #-}
 {-# COMPILE GHC Alternative = type AgdaAlternativeDict #-}
 
 {-# COMPILE GHC pure   = \ ℓ a     f AgdaApplicativeDict -> Control.Applicative.pure   #-}
