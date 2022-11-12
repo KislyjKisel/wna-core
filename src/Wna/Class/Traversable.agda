@@ -19,13 +19,13 @@ module _ {ℓ} (T : Type ℓ → Type ℓ) where
 
         traverse = ∀{A B} {F : Type ℓ → Type ℓ} ⦃ _ : RawApplicative F ⦄ →
             (A → F B) → T A → F (T B)
-        
+
         sequenceA = ∀{A} {F : Type ℓ → Type ℓ} ⦃ _ : RawApplicative F ⦄ →
             T (F A) → F (T A)
-        
+
         mapM = ∀{A B} {M : Type ℓ → Type ℓ} ⦃ _ : RawMonad M ⦄ →
             (A → M B) → T A → M (T B)
-        
+
         sequence = ∀{A} {M : Type ℓ → Type ℓ} ⦃ _ : RawMonad M ⦄ →
             T (M A) → M (T A)
 

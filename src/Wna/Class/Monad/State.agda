@@ -14,7 +14,7 @@ record MonadState {ℓ} (S : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
 
         get : M S
         put : S → M ⊤
-    
+
     modify : (S → S) → M ⊤
     modify f = let open RawMonad rawMonad in do
         x ← get
@@ -29,7 +29,7 @@ record MonadState {ℓ} (S : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
 record IMonadState {ℓ} (M : IFun (Type ℓ) ℓ) : Type (ℓ↑ ℓ) where
     field
         overlap ⦃ rawIMonad ⦄ : RawIMonad M
-        
+
         iget : ∀{i} → M i i i
         iput : ∀{i j} → j → M i j ⊤
 

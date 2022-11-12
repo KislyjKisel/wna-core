@@ -12,7 +12,7 @@ record MonadLocal {ℓ} (E : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
         overlap ⦃ rawMonad ⦄ : RawMonad M
         overlap ⦃ M-ask ⦄    : MonadAsk E M
-    
+
     field
         local : (E → E) → {A : Type ℓ} → M A → M A
 

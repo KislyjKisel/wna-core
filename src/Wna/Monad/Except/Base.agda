@@ -22,7 +22,7 @@ open ExceptT public
 Except : ∀{ℓ} (E : Type ℓ) → Fun ℓ
 Except E = ExceptT E Identity
 
-module _ {ℓ} {E : Type ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ where 
+module _ {ℓ} {E : Type ℓ} {M : Fun ℓ} ⦃ M-monad : RawMonad M ⦄ where
     private
         module M = RawMonad M-monad
 

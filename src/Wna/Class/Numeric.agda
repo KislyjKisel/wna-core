@@ -67,7 +67,7 @@ record Modulo {aℓ bℓ} (A : Type aℓ) (B : A → Type bℓ) : Typeω where
         {P}    : (x : A) → (y : B x) → Type pℓ
         P?     : (x : A) → (y : B x) → Dec (P x y)
         _%_⟨_⟩ : (x : A) → (y : B x) → .(P x y) → R x y
-    
+
     _%_ : (x : A) → (y : B x) → .⦃ _ : True (P? x y) ⦄ → R x y
     _%_ x y ⦃ t ⦄ = x % y ⟨ toWitness t ⟩
 

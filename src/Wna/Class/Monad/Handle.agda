@@ -9,8 +9,8 @@ open import Wna.Primitive
 record MonadHandle {ℓ} (E : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
         overlap ⦃ rawMonad ⦄ : RawMonad M
-        
-        handle : ∀{A} → M A → (E → M A) → M A 
+
+        handle : ∀{A} → M A → (E → M A) → M A
 
 module Instanced where
     open MonadHandle ⦃...⦄ public

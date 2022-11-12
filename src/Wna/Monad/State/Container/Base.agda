@@ -27,7 +27,7 @@ module _ {ℓ} {S : Type ℓ} {M : Container ℓ ℓ} ⦃ M-monad : RawMonad {�
     private
         module M = RawMonad M-monad
 
-    makeT : {A : Type ℓ} → (S → ⟦ M ⟧ (A × S)) → ⟦ StateT S M ⟧ A 
+    makeT : {A : Type ℓ} → (S → ⟦ M ⟧ (A × S)) → ⟦ StateT S M ⟧ A
     makeT f = Ccp.constexp-to $′
         Ccp.composition-to ∘′
         M.map (Ccp.product-to ∘′ Σ.map Ccp.id-to Ccp.const-to) ∘′
@@ -54,11 +54,11 @@ module _ {ℓ} {S : Type ℓ} {M : Container ℓ ℓ} ⦃ M-monad : RawMonad {�
     pureT = to (M.pure ∘′ Id.runIdentity) ∘′ St.pure
 
     _>>=T_ : ∀{A B : Type ℓ} → ⟦ StateT S M ⟧ A → (A → ⟦ StateT S M ⟧ B) → ⟦ StateT S M ⟧ B
-    _>>=T_ {A} x f = makeT λ s → runT x s M.>>= λ(x' , s') → runT (f x') s' 
+    _>>=T_ {A} x f = makeT λ s → runT x s M.>>= λ(x' , s') → runT (f x') s'
 
 module _ {ℓ} {S : Type ℓ} where
 
-    make : {A : Type ℓ} → (S → A × S) → ⟦ State S ⟧ A 
+    make : {A : Type ℓ} → (S → A × S) → ⟦ State S ⟧ A
     make f = makeT ⦃ Idc.rawMonad ⦄ (Idc.mkIdentity ∘′ f)
 
     run : {A : Type ℓ} → ⟦ State S ⟧ A → S → A × S

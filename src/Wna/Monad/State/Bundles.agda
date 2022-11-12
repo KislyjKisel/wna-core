@@ -12,7 +12,7 @@ open import Wna.Monad.State.Base
 open import Wna.Monad.Trans
 open import Wna.Primitive
 
-rawMonadTI : ∀{ℓ} → RawMonadTI (StateTI {ℓ}) 
+rawMonadTI : ∀{ℓ} → RawMonadTI (StateTI {ℓ})
 rawMonadTI = MkRawIMonad.from:pure,>>= pureTI _>>=TI_
 
 rawMonadI : ∀{ℓ} → RawIMonad (StateI {ℓ = ℓ})

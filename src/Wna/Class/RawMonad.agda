@@ -37,7 +37,7 @@ mutual
         field
             _>>=_ : FT._>>=_
             join  : FT.join
-            
+
             overlap ⦃ rawIApplicative ⦄ : RawIApplicative F
 
         open RawIApplicative rawIApplicative public

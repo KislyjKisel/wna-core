@@ -20,6 +20,6 @@ pure : ∀{ℓ} {A : Type ℓ} → A → Unit A
 pure _ = _
 
 _>>=_ : ∀{ℓ} {A B : Type ℓ} → Unit A → (A → Unit B) → Unit B
-_ >>= _ = _ 
+_ >>= _ = _
 
 

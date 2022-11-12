@@ -119,7 +119,7 @@ module _ {ℓ₁ ℓ₂} (T : Type ℓ₁ → Type ℓ₂) where
 module Instanced where
     open Foldable ⦃...⦄ public
         using (foldl; foldr; fold; foldMap)
-  
+
     module _ {aℓ} {F : Type aℓ → Type aℓ} ⦃ _ : RawApplicative F ⦄
              {T : Type aℓ → Type aℓ} ⦃ _ : Foldable T ⦄
              where

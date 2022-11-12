@@ -53,8 +53,8 @@ module _ {ℓ} {F M : Container ℓ ℓ} ⦃ M-monad : RawMonad {aℓ = ℓ} ⟦
         sup ∘′ Cp.composition-to ∘′ f ∘′ Cp.composition-from
 
     map : ∀{A B} → (A → B) → FreeT F M A → FreeT F M B
-    map f = mkFree ∘′ 
-                (W.map $′ C.map (⊎.map₂ f) ▷ 
+    map f = mkFree ∘′
+                (W.map $′ C.map (⊎.map₂ f) ▷
                     λ{ {_ , mp} (any (p , v)) → any $′ p , aux _ f (mp p) v })
             ∘′ runFree
         where

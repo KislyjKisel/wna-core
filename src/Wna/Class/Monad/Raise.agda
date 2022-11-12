@@ -9,8 +9,8 @@ open import Wna.Primitive
 record MonadRaise {ℓ} (E : Type ℓ) (M : Fun ℓ) : Type (ℓ↑ ℓ) where
     field
         overlap ⦃ rawMonad ⦄ : RawMonad M
-        
-        raise : E → ∀{A} → M A 
+
+        raise : E → ∀{A} → M A
 
 module Instanced where
     open MonadRaise ⦃...⦄ public

@@ -22,7 +22,7 @@ open ReaderIT public
 ReaderT : ∀{rℓ} (R : Type rℓ) → MonT rℓ rℓ
 ReaderT R M = ReaderIT R (Fun⇒IFun M) _ _
 
-Reader : ∀{rℓ} (R : Type rℓ) → Fun rℓ  
+Reader : ∀{rℓ} (R : Type rℓ) → Fun rℓ
 Reader R = ReaderT R Identity
 
 module _ {rℓ} {R : Type rℓ} {iℓ} {I : Type iℓ} {M : IFun I rℓ} ⦃ M-imonad : RawIMonad M ⦄ where

@@ -11,7 +11,7 @@ open import Wna.Monad.Free.Inductive.Base
 open import Wna.Monad.Identity.Container.Bundles as Id using ()
 
 module _ {ℓ} {F M : Container ℓ ℓ} ⦃ M-monad : RawMonad {aℓ = ℓ} ⟦ M ⟧ ⦄ where
-    
+
     rawMonadT : RawMonad (FreeT F M)
     rawMonadT = record
         { _>>=_           = _>>=_

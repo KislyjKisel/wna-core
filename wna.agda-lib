@@ -1,0 +1,5 @@
+name: wna
+include: src
+flags:
+depend:
+    standard-library-2.0

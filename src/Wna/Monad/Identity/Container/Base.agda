@@ -9,7 +9,7 @@ open import Data.Product                         using (_,_)
 open import Wna.Primitive
 
 module _ {ℓ} where
-    
+
     Identity : Container ℓ ℓ
     Identity = id
 

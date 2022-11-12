@@ -22,7 +22,7 @@ Writer W = WriterT W Cc.id
 module _ {ℓ} {W : Type ℓ} ⦃ W-monoid : RawMonoid W ⦄
          {M : Container ℓ ℓ} ⦃ M-monad : RawMonad {ℓ} ⟦ M ⟧ ⦄
          where
-        
+
     private
         module W = RawMonoid W-monoid
         module M = RawMonad M-monad

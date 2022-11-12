@@ -2,11 +2,22 @@
 
 module Wna.Data.Container.Bundles where
 
-open import Data.Container.Core  using (Container; map; ⟦_⟧)
-open import Wna.Class.RawFunctor using (RawFunctor; module MkRawFunctor)
+open import Data.Container.Core      using (Container; map; ⟦_⟧)
+open import Data.Product             using (_,_)
+open import Effect.Functor           using (RawFunctor)
+open import Level               as ℓ using (Level)
+open import Wna.Class.Universe       using (Universe; universe)
 
-rawFunctor : ∀{s p ℓ} {C : Container s p} → RawFunctor {aℓ = ℓ} ⟦ C ⟧
-rawFunctor {C = C} = record
-    { _<$>_ = map
-    ; _<$_  = MkRawFunctor.<$>⇒<$ {F = ⟦ C ⟧} map
-    }
+private
+    variable
+        sℓ pℓ ℓ : Level
+
+
+universe₁ : Universe 1 (ℓ , _) (ℓ ℓ.⊔ sℓ ℓ.⊔ pℓ) (Container sℓ pℓ)
+universe₁ = universe ⟦_⟧
+
+universe₀ : Set ℓ → Universe 0 _ (ℓ ℓ.⊔ sℓ ℓ.⊔ pℓ) (Container sℓ pℓ)
+universe₀ A = universe λ C → ⟦ C ⟧ A
+
+functor : ∀{sℓ pℓ ℓ} {C : Container sℓ pℓ} → RawFunctor {ℓ} ⟦ C ⟧
+functor {C = C} = record { _<$>_ = map }

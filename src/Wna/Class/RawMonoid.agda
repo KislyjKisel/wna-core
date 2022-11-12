@@ -16,7 +16,7 @@ from-std sm = Carrier , record { mappend = _∙_ ; mempty = ε }
     where open Ab.RawMonoid sm
 
 dual : ∀{ℓ} {A : Type ℓ} → RawMonoid A → RawMonoid A
-dual rm = record rm { mappend = λ x y → RawMonoid.mappend rm y x } 
+dual rm = record rm { mappend = λ x y → RawMonoid.mappend rm y x }
 
 module Instanced where
     open RawMonoid ⦃...⦄ public

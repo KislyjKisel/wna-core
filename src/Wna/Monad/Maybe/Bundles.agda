@@ -44,4 +44,4 @@ module _ {ℓ} where
     monadTrans : MonadTrans (MaybeT {ℓ = ℓ})
     monadTrans = record
         { lift = lift
-        } 
+        }

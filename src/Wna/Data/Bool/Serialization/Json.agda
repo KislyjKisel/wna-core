@@ -19,5 +19,5 @@ json-decode : Json.Decode Bool
 json-decode = record
     { decode = λ v → case Json.IsBool? v of λ where
         (yes (x , _)) → Except.pure x
-        (no _)        → Except.raise $′ liftℓ "parsed value wasn't bool" 
+        (no _)        → Except.raise $′ liftℓ "parsed value wasn't bool"
     }

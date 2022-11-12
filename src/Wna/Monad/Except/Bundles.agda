@@ -14,7 +14,7 @@ open import Wna.Monad.Trans
 open import Wna.Primitive
 
 module _ {eℓ} {E : Type eℓ} where
- 
+
     rawMonadT : RawMonadT (ExceptT E)
     rawMonadT = MkRawMonad.from:pure,>>= pureT _>>=T_
 

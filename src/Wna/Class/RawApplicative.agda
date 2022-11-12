@@ -25,7 +25,7 @@ module IApplicativeFT {iℓ aℓ} {I : Type iℓ} (F : IFun I aℓ) where
 
     pure : Type (iℓ ℓ⊔ ℓ↑ aℓ)
     pure = ∀ {A : Type aℓ} {i} → A → F i i A
-    
+
     _<*>_ : Type (iℓ ℓ⊔ ℓ↑ aℓ)
     _<*>_ = ∀ {A B : Type aℓ} {i j k} → F i j (A → B) → F j k A → F i k B
 
@@ -34,7 +34,7 @@ module IApplicativeFT {iℓ aℓ} {I : Type iℓ} (F : IFun I aℓ) where
 
     _<*_ : Type (iℓ ℓ⊔ ℓ↑ aℓ)
     _<*_ = ∀ {A B : Type aℓ} {i j k} → F i j A → F j k B → F i k A
-    
+
     _*>_ : Type (iℓ ℓ⊔ ℓ↑ aℓ)
     _*>_ = ∀ {A B : Type aℓ} {i j k} → F i j A → F j k B → F i k B
 
@@ -106,7 +106,7 @@ module MkRawIApplicative {iℓ aℓ} {I : Type iℓ} {F : IFun I aℓ} where
     <$>,<*>⇒*> : FT._<$>_ → FT._<*>_ → FT._*>_
     <$>,<*>⇒*> _<$>_ _<*>_ = λ x y → (constᵣ <$> x) <*> y
 
-    from:pure,<*> : FT.pure → FT._<*>_ → RawIApplicative F 
+    from:pure,<*> : FT.pure → FT._<*>_ → RawIApplicative F
     from:pure,<*> pure _<*>_ = record
         { rawFunctor = rawFunctor
         ; pure       = pure

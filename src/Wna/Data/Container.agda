@@ -2,6 +2,7 @@
 
 module Wna.Data.Container where
 
-open import Wna.Data.Container.Base       public
-open import Wna.Data.Container.Bundles    public
-open import Wna.Data.Container.Conversion public
+open import Data.Container.Core        public
+open import Data.Container.Combinator  public
+open import Wna.Data.Container.Base    public
+open import Wna.Data.Container.Bundles public

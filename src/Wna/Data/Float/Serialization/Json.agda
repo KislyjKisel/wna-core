@@ -39,6 +39,6 @@ json-encode = record
     where
     aux : (m₂ : ℕ) → ⦃ _ : ℕ.NonZero m₂ ⦄ → ℕ → ℕ × ℤ
     aux m₂ e₂ with ℕ.log m₂ {d = 5} (ℕ.s≤s (ℕ.s≤s ℕ.z≤n))
-    ... | (ℕlog₅m , rem , _) with e₂ ℕ.≤? ℕlog₅m 
+    ... | (ℕlog₅m , rem , _) with e₂ ℕ.≤? ℕlog₅m
     ... | (yes logm≥e) = rem ℕ.* (5 ℕ.^ (ℕlog₅m ℕ.∸ e₂)) , ℤ.+ e₂
     ... | (no  logm<e) = rem ℕ.* (2 ℕ.^ (e₂ ℕ.∸ ℕlog₅m)) , ℤ.+ (e₂ ℕ.∸ ℕlog₅m)

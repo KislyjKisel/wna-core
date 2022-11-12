@@ -1,4 +1,8 @@
+# Wna
+
+Utilities for programming in Agda.
+
 ## Dependencies
 
-* Agda 2.6.2.1
-* standard-library-2.0
+* Agda-dev
+* standard-library experimental

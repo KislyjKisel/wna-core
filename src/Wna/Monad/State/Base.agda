@@ -29,14 +29,14 @@ open StateTI public
     using (runTI; evalTI; execTI)
 
 StateI : ∀{ℓ} → IFun (Type ℓ) ℓ
-StateI = StateTI Identity 
+StateI = StateTI Identity
 
 StateT : ∀{ℓ} → Type ℓ → MonT ℓ ℓ
 StateT S M = StateTI M S S
 
 module _ {ℓ} {S : Type ℓ} {M} {A : Type ℓ} where
 
-    makeT : (S → M (A × S)) → StateT S M A 
+    makeT : (S → M (A × S)) → StateT S M A
     makeT f = makeTI f
 
     runT : StateT S M A → S → M (A × S)
